@@ -1,13 +1,12 @@
 import React from 'react';
+import MainHome from './Componentes/HomePageContent/MainHome';
 
 function App() {
 
   return (
-    <div className="App">
-     <h1 className="text-3xl font-bold underline">
-      Hello world! Social App
-    </h1> 
-    </div>
+    <>
+  <MainHome/>
+    </>
   )
 }
 
