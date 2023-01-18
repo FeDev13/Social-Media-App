@@ -59,7 +59,7 @@ const AsideRight = () => {
             </a>
           </div>
         </div>
-        <div className="w-[100%] h-[40%] p-[2%] justify-center flex">
+        <div className="w-[100%] h-[46%] p-[2%] justify-center flex">
           <div className="flex flex-col w-full rounded-lg p-5 shadow-lg bg-white">
           <div className="w-full">
             <h4 className=" text-sm font-bold opacity-30 my-3 mb-5">RECOMMENDATION</h4>
