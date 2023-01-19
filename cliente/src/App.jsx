@@ -1,13 +1,12 @@
-import React from 'react';
-import MainHome from './Componentes/HomePageContent/MainHome';
+import React from "react";
+import MainHome from "./Componentes/HomePageContent/MainHome";
 
 function App() {
-
   return (
     <>
-  <MainHome/>
+      <MainHome />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

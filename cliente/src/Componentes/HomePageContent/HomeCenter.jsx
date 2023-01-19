@@ -1,6 +1,12 @@
 import React from "react";
-
+import { useState, useEffect } from "react";
 const HomeCenter = () => {
+  const [count, setCount] = useState(0);
+
+  function handleSubmit() {
+    setCount(count + 1);
+  }
+
   return (
     <div className="w-[60%] p-[2%]  flex ">
       <div className=" w-[100%] p-[2%]  flex rounded-lg shadow-lg bg-white flex-col">
@@ -54,6 +60,7 @@ const HomeCenter = () => {
               strokeWidth={1.5}
               stroke="currentColor"
               className="w-6 h-6"
+              onClick={handleSubmit}
             >
               <path
                 strokeLinecap="round"
@@ -61,7 +68,7 @@ const HomeCenter = () => {
                 d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
               />
             </svg>
-            <h4 className="text-xs font-extralight">120 Likes</h4>
+            <h4 className="text-xs font-extralight">{count}</h4>
           </div>
           <div className="flex gap-2 items-center">
             <svg
@@ -106,7 +113,7 @@ const HomeCenter = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="top-6 right-8 absolute w-4 h-4 opacity-70"
+            className="top-7 right-8 absolute w-4 h-4 opacity-70"
           >
             <path
               strokeLinecap="round"
