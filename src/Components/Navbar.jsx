@@ -3,12 +3,13 @@ import { useState } from "react";
 import search from "../icons/search.svg";
 import hamburger from "../icons/icons8-hamburger-menu-32.png";
 import NavSearch from "./NavSearch";
-import home from "../icons/icons8-home-32.png";
-import groups from "../icons/icons8-friend-32.png";
+import home from "../icons/icons8-home-48.png";
+import groups from "../icons/icons8-friends-48.png";
 import { NavExtra } from "./NavExtra";
 import Messenger from "../icons/icons8-send-32.png";
 import Notififaction from "../icons/icons8-bell-32.png";
 import Avatar from "../icons/avatar1png.png";
+import Logo from "../icons/logo.png";
 
 import { Menu } from "../Components/Menu";
 
@@ -31,9 +32,11 @@ const Navbar = () => {
     },
   ];
   return (
-    <div className="h-16 flex items-center justify-between px-2 lg:px-5 bg-teal-600">
+    <div className="h-16 flex items-center justify-between px-2 lg:px-5 bg-white">
       <div className="flex gap-2 lg:gap-3">
-        <div className=" text-white text-2xl mx-8">Social media app</div>
+        <div className="  mx-8 w-1/3">
+          <img src={Logo} alt="" />
+        </div>
         <div
           className="grid place-content-center bg-white w-11 h-11 lg:w-6 rounded-full lg:hidden"
           onClick={() => {
@@ -44,9 +47,7 @@ const Navbar = () => {
         >
           <img src={search} alt="lupa" />
         </div>
-        <div className="hidden lg:block">
-          <NavSearch />
-        </div>
+
         <div className="lg:hidden grid place-content-center w-11 h-11 hover:bg-gray-3 rounded-3xl cursor-pointer">
           <img
             src={hamburger}
@@ -90,6 +91,9 @@ const Navbar = () => {
             <img src={icon} alt="" />
           </a>
         ))}
+      </div>
+      <div className="hidden lg:block">
+        <NavSearch />
       </div>
       <div className="flex gap-8 rounded-3xl bg-teal-500 p-1">
         <NavExtra imgSrc={Messenger} tooltip="messenger" />
