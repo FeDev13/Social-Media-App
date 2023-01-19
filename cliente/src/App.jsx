@@ -1,12 +1,10 @@
 import React from 'react';
-
+import Login from './Login';
 function App() {
 
   return (
-    <div className="App">
-     <h1 className="text-3xl font-bold underline">
-      Hello world! SOCIALLL
-    </h1> 
+    <div className='w-full flex justify-center bg-[#F3F5F7]' >
+        <Login/>
     </div>
   )
 }
