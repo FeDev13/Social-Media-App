@@ -7,7 +7,7 @@ const login = async (req, res) => {
     console.log(req.body);
     User.findOne(
         {
-            email : req.body.email,    
+            username : req.body.username,    
         }
         
     ).then( (user)=>{
