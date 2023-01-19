@@ -1,11 +1,21 @@
 import React from 'react';
-import Login from './Login';
+import Home from "./Componentes/HomePageContent/MainHome" 
+import Login from './Componentes/Login';
+import Navbar from './Componentes/Navbar/Navbar'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 function App() {
 
   return (
-    <div className='w-full flex justify-center bg-[#F3F5F7]' >
-        <Login/>
-    </div>
+    <>
+     <BrowserRouter>
+        <Routes>
+        <Route path="/" element={[<Navbar/>,<Home/>]} />
+        <Route path="/Login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+
+    </>
   )
 }
 
