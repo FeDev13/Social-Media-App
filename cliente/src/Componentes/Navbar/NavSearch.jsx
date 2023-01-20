@@ -4,7 +4,7 @@ const NavSearch = () => {
   const [buscar, setBuscar] = useState("");
   console.log(buscar);
   return (
-    <div className=" relative rounded-full bg-slate-400 p-2 max-lg:hidden">
+    <div className=" relative rounded-full bg-[#F3F5F7] p-2 max-lg:hidden">
       <a
         className="absolute top-2 right-4 "
         href={buscar === "" ? "/" : "/Search/" + buscar}
@@ -14,7 +14,7 @@ const NavSearch = () => {
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
-          stroke="white"
+          stroke="gray"
           className="h-6 w-6"
         >
           <path
