@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import NavSearch from "./NavSearch";
 
 const Navbar = () => {
@@ -8,10 +9,12 @@ const Navbar = () => {
   const [menuState, setMenuState] = useState(false);
 
   return (
-    <div className="flex top-0 z-10 fixed w-[100%] items-center justify-between bg-black  p-6 max-lg:px-6 ">
+    <div className="fixed top-0 z-10 flex w-[100%] items-center justify-between bg-black  p-6 max-lg:px-6 ">
       <div className="flex">
         <div className="flex items-center max-sm:hidden">
-          <h1 className="pl-8 text-3xl uppercase max-lg:p-0 text-white max-lg:text-xl max-xl:text-2xl">Social media app</h1>
+          <h1 className="pl-8 text-3xl uppercase text-white max-xl:text-2xl max-lg:p-0 max-lg:text-xl">
+            Social media app
+          </h1>
         </div>
         {/* <div
           className="grid h-11 w-11 place-content-center rounded-full bg-white lg:hidden lg:w-6"
@@ -59,22 +62,23 @@ const Navbar = () => {
           </svg>
         </div> */}
       </div>
-      <div className=" flex items-center gap-8 lg:w-[50%] justify-center">
-        
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="white"
-          className="h-6 w-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-          />
-        </svg>
+      <div className=" flex items-center justify-center gap-8 lg:w-[50%]">
+        <Link to="/">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="white"
+            className="h-6 w-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+            />
+          </svg>
+        </Link>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -155,21 +159,22 @@ const Navbar = () => {
             d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
           />
         </svg>
-
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="white"
-          className="h-6 w-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-          />
-        </svg>
+        <Link to="/login">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="white"
+            className="h-6 w-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+          </svg>
+        </Link>
         {/* <div
           className={`absolute top-16 duration-500  ${
             menuState ? "w-full md:w-2/3 lg:w-2/4" : "h-0 w-0"

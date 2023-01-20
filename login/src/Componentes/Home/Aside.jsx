@@ -195,7 +195,7 @@ const Aside = () => {
             </div>
           </div>
           <div className="w-full">
-            <h4 className=" text-sm  my-3 pl-3 text font-semibold">FOLLOWING</h4>
+            <h4 className=" text-sm  my-3 pl-3 text font-semibold">RECOMMENDATION</h4>
             <div className="flex justify-between p-2 max-xl:px-0">
               <div className="flex gap-4 items-center">
                 <svg

@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 const Login = () => {
   const url = "http://localhost:5050/login";
   const [username, setUsername] = useState("");
@@ -27,8 +27,24 @@ const Login = () => {
         <div className="flex w-[33%] items-center justify-center p-[2%]">
           <form
             onSubmit={handleSubmit}
-            className="flex w-full flex-col items-center rounded-lg bg-white p-[2%]"
+            className="relative flex w-full flex-col items-center rounded-lg bg-white p-[2%]"
           >
+            <Link to="/">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="h-6 w-6 absolute right-3"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+            </Link>
             <div className="my-4 flex w-full justify-center">
               <h1 className="text-3xl font-light">
                 Login Your Account{" "}
