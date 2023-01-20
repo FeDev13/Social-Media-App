@@ -2,8 +2,8 @@ import React from "react";
 
 const NavSearch = () => {
   return (
-    <form className="flex  h-11 w-auto items-center justify-center rounded-full bg-slate-200 px-8">
-      <label className="flex gap-3">
+    <form className="max-lg:hidden  flex w-  items-center  w-[80%] rounded-lg bg-white p-2">
+      <label className="flex ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -21,7 +21,7 @@ const NavSearch = () => {
         <input
           type="text"
           placeholder="Buscar"
-          className="bg-transparent text-black focus:outline-none "
+          className="bg-transparent text-black focus:outline-none pl-4 "
         />
       </label>
     </form>

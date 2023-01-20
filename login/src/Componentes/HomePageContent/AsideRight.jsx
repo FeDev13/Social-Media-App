@@ -4,8 +4,8 @@ import "tw-elements";
 const AsideRight = () => {
   return (
     <>
-      <div className="flex flex-col w-[20%] pt-[1.6%] gap-y-5">
-        <div className="w-[100%] p-[2%] justify-center flex">
+      <div className="flex  flex-col w-[15%] pt-[1.6%] gap-y-5 max-lg:w-[25%] max-sm:hidden">
+        <div className="fixed w-[15%] max-lg:w-[25%]  justify-center flex">
           <div className="flex flex-col w-full rounded-lg p-3 shadow-lg bg-white">
             <div className="flex flex-col justify-center">
               <div className="relative flex justify-center">
@@ -43,21 +43,21 @@ const AsideRight = () => {
             </div>
             <a className="w-[100%] relative flex items-center">
               <div className="w-full flex items-center ">
-              <svg
+              {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="white"
-                className="w-5 h-5 absolute mx-24"
+                className="w-5 h-5 absolute left-16"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
                 />
-              </svg>
-              
+              </svg> */}
+
               <button
                 type="button"
                 class="w-full px-6
@@ -125,7 +125,7 @@ const AsideRight = () => {
             className="w-full text-sm pl-8 pr-16 p-2 rounded-lg outline-none bg-gray-100"
             placeholder="What's going on?"
           />
-         
+
         </div>
                     </div>
                     <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
@@ -180,8 +180,8 @@ const AsideRight = () => {
             </a>
           </div>
         </div>
-        <div className="w-[100%] h-[45%] p-[2%] justify-center flex">
-          <div className="flex flex-col w-full rounded-lg p-5 shadow-lg bg-white">
+        {/* <div className="w-[100%] h-[45%] p-[2%] justify-center flex">
+          <div className="fixed top-50 w-[15%] flex flex-col  rounded-lg p-5 shadow-lg bg-white">
             <div className="w-full">
               <h4 className=" text-sm font-bold opacity-30 my-3 mb-5">
                 RECOMMENDATION
@@ -224,7 +224,7 @@ const AsideRight = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
