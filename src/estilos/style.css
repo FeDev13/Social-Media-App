@@ -1,0 +1,33 @@
+.foo{
+
+position: relative;
+top: 70vh;
+background: linear-gradient(rgb(26, 25, 25), rgb(1, 1, 75));
+height: 27.6vh; 
+border-top-left-radius: 80px;
+ 
+ 
+animation: animatione 10s 2s alternate infinite ;
+}
+
+@keyframes animatione {
+    0%{box-shadow: 1px 1px 40px 10px rgb(15, 63, 109)}
+    50%{box-shadow: 1px 1px 40px 10px rgb(76, 19, 129)}
+    100%{box-shadow: 1px 1px 40px 10px rgb(54, 35, 107)}
+}
+
+
+.copy{
+
+display: flex;   
+justify-content: center;
+color: white;
+position: relative;
+top: 50%;
+
+
+}
+
+ 
+
+ 
