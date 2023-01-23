@@ -1,13 +1,10 @@
 import React from 'react';
+import Messages from './Componentes/Messages';
 
 function App() {
 
   return (
-    <div className="App">
-     <h1 className="text-3xl font-bold underline">
-      Hello world! SOCIALLL
-    </h1> 
-    </div>
+    <Messages/>
   )
 }
 
