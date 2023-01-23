@@ -4,8 +4,8 @@ const HomeCenter = () => {
 
 
   return (
-    <div className="w-[65%] py-[2%] px-[2%] max-ms:px-0 flex-col gap-y-8 max-md:pl-0 max-lg:w-[70%] flex max-sm:w-[95%] h-[50%]">
-      <div className=" w-[100%] p-[2%] max-lg:p-0  flex rounded-lg shadow-lg bg-white flex-col">
+    <div className="w-[65%] py-[2%] px-[2%]  max-ms:px-0 flex-col gap-y-8 max-md:pl-0 max-lg:w-[70%] flex max-sm:w-[95%] h-[50%]">
+      <div className=" w-[100%] p-[2%] max-lg:p-0  flex rounded-lg shadow-lg dark:text-white bg-white dark:bg-[#16181C] flex-col">
         <div className="flex h-16 w-full p-2">
           <div className="flex  w-full items-center gap-4 relative  ">
             <img
@@ -119,7 +119,7 @@ const HomeCenter = () => {
           </svg>
         </div>
       </div>
-      <div className=" w-[100%] p-[2%] max-lg:p-0  flex rounded-lg shadow-lg bg-white flex-col">
+      <div className=" w-[100%] p-[2%] max-lg:p-0  flex rounded-lg shadow-lg dark:text-white dark:bg-[#16181C] bg-white flex-col">
         <div className="flex h-16 w-full p-2">
           <div className="flex  w-full items-center gap-4 relative  ">
             <img

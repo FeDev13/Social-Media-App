@@ -10,15 +10,18 @@ function App() {
 
   return (
     <>
+
      <BrowserRouter>
+     <div className=' bg-white dark:bg-black h-screen'>
         <Routes>
-        <Route path="/" element={[<Navbar/>,<Home/>]} />
+        <Route path="/" element={[<div > <Navbar/>,<Home/></div>]} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Profile" element={<UserProfile />} />
         <Route path="/Search/:buscar" element={<Search />} />
         </Routes>
+        </div>
       </BrowserRouter>
-
+    
     </>
   )
 }

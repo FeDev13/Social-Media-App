@@ -4,7 +4,7 @@ const Aside = () => {
   return (
     <>
       <div className="w-[15%] py-[2%]  justify-center  flex max-lg:hidden">
-        <div className="flex fixed w-[15%] flex-col  rounded-lg p-3 shadow-lg bg-white max-xl:text-xs">
+        <div className="flex fixed w-[15%] flex-col  rounded-lg p-3 shadow-lg bg-white dark:text-white dark:bg-[#16181C] max-xl:text-xs">
           <div className="relative w-[100%] ">
             <input
               type="search"
@@ -17,7 +17,7 @@ const Aside = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="top-2 left-2 absolute w-4 h-4 opacity-70"
+              className="top-2 left-2 absolute w-4 h-4 opacity-70 dark:stroke-black"
             >
               <path
                 strokeLinecap="round"
@@ -36,7 +36,7 @@ const Aside = () => {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-6 h-6 "
                 >
                   <path
                     strokeLinecap="round"
@@ -52,7 +52,8 @@ const Aside = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="blue"
-                className="w-6 h-6"
+                className="w-6 h-6 "
+                id="plus"
               >
                 <path
                   strokeLinecap="round"
@@ -351,7 +352,7 @@ const Aside = () => {
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
-                stroke="blue"
+                stroke="black"
                 className="w-6 h-6"
               >
                 <path

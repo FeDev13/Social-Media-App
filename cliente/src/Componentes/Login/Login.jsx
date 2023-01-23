@@ -23,11 +23,11 @@ const Login = () => {
   };
   return (
     <>
-      <div className="flex w-full justify-center bg-[#F3F5F7]">
+      <div className="flex w-full justify-center bg-[#F3F5F7] dark:bg-black h-screen">
         <div className="flex w-[33%] items-center justify-center p-[2%]">
           <form
             onSubmit={handleSubmit}
-            className="relative flex w-full flex-col items-center rounded-lg bg-white p-[2%]"
+            className="relative flex w-full flex-col items-center rounded-lg dark:text-white bg-white dark:bg-[#16181C] p-[2%]"
           >
             <Link to="/">
             <svg
@@ -48,7 +48,7 @@ const Login = () => {
             <div className="my-4 flex w-full justify-center">
               <h1 className="text-3xl font-light">
                 Login Your Account{" "}
-                <span className="text-5xl font-bold text-blue-800 ">.</span>
+                <span className="text-5xl font-bold text-blue-800 " >.</span>
               </h1>
             </div>
             <div className="my-4 flex w-full flex-col gap-4">
@@ -70,7 +70,7 @@ const Login = () => {
               <div className="flex w-full justify-center">
                 <button
                   onSubmit={handleSubmit}
-                  className="rounded-lg border bg-blue-800 p-2 text-white "
+                  className="rounded-lg border dark:border-black bg-blue-800 p-2 text-white "
                 >
                   Iniciar Sesion
                 </button>

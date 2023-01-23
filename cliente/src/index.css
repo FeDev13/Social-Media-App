@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    background-color: #F3F5F7;
+
+.color-item{
+    background-color: var(--bg-color);
 }

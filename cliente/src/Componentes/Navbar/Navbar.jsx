@@ -1,15 +1,61 @@
 import React from "react";
 import { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import NavSearch from "./NavSearch";
+import "tw-elements";
+import ColorItem from "../Home/color-item";
 
 const Navbar = () => {
+  let btn = document.getElementById("btn");
+  
+  let modal = document.getElementById("modal");
+  let nav = document.getElementById("nav");
+  let plus = document.getElementById("plus");
+  const colors = ["#ff6961", "#2ABA7D", "#fdfd96", "#84b6f4", "#fdcae1"];
+
+  const setColor = (event) => {
+    const currentColor = event.target.style.getPropertyValue("--bg-color");
+
+    setTheme(currentColor);
+    localStorage.setItem("color", currentColor);
+  };
+
+  useEffect(() => {
+    const currentColor = localStorage.getItem("color");
+    setTheme(currentColor);
+  });
+
   const [searchState, setSearchState] = useState(false);
   const [hamState, setHamState] = useState(false);
   const [menuState, setMenuState] = useState(false);
 
+  const [theme, setThemes] = useState("");
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [theme]);
+
+  const handelThemeSwitch = () => {
+    setThemes(theme === "dark" ? "light" : "dark");
+    localStorage.setItem("theme", theme);
+  };
+
+  useEffect(() => {
+    const currentColor = localStorage.getItem("theme");
+    setThemes(currentColor);
+  });
+
   return (
-    <div className="fixed top-0 z-10 flex w-[100%] items-center justify-between bg-black  p-6 max-lg:px-6 ">
+    <div
+      id="nav"
+      className="fixed top-0 z-10 flex w-[100%] items-center justify-between bg-black  p-6 max-lg:px-6 "
+    >
       <div className="flex">
         <div className="flex items-center max-sm:hidden">
           <h1 className="pl-8 text-3xl uppercase text-white max-xl:text-2xl max-lg:p-0 max-lg:text-xl">
@@ -79,20 +125,101 @@ const Navbar = () => {
             />
           </svg>
         </Link>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="white"
-          className="h-6 w-6"
+
+        <button
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModalCenter"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
-          />
-        </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="white"
+            className="h-6 w-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+          </svg>
+        
+        </button>
+
+        <div
+          class="modal fade z- fixed top-[40%] left-0 hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+          id="exampleModalCenter"
+          tabindex="-1"
+          aria-labelledby="exampleModalCenterTitle"
+          aria-modal="true"
+          role="dialog"
+        >
+          <div class="modal-dialog modal-dialog-centered pointer-events-none relative w-auto">
+            <div class="modal-content pointer-events-auto relative m-auto flex w-[50%] flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-xl  outline-none dark:bg-[#16181C] dark:text-white max-lg:w-[70%] max-md:w-[90%]">
+              <div class="modal-header flex flex-shrink-0 items-center justify-between rounded-t-md border-b border-gray-200 p-4">
+                <h5
+                  class="text-xl font-medium leading-normal text-gray-800 dark:text-white"
+                  id="exampleModalScrollableLabel"
+                >
+                  Personaliza tu visualización
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close box-content h-4 w-4 rounded-none border-none p-1 text-black opacity-50 hover:text-black hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body relative p-4">
+                <div className="flex flex-wrap gap-6 p-3 max-sm:py-0">
+                  <h1>Colors:</h1>
+                  {colors.map((color, idx) => (
+                    <ColorItem key={idx} setColor={setColor} color={color} />
+                  ))}
+                </div>
+                <div className="flex gap-6 p-3">
+                  <h1>Thema:</h1>
+                  <a className="link" onClick={handelThemeSwitch}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="h-6 w-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d={ theme === "dark" ? "M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" : "M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" }
+                      />
+                    </svg>
+                   
+
+                  </a>
+                </div>
+              </div>
+              <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t border-gray-200 p-4">
+                <button
+                  type="button"
+                  id="modal"
+                  class="inline-block rounded px-6  py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md  transition duration-150 ease-in-out hover:shadow-lg  focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
+                  data-bs-dismiss="modal"
+                >
+                  Aceptar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <NavSearch />
       </div>
       {/* <div
@@ -185,6 +312,13 @@ const Navbar = () => {
       </div>
     </div>
   );
+};
+const setTheme = (color) => {
+  document.documentElement.style.setProperty("--bg-color", color);
+  btn.style.background = ("--bg-color", color);
+  modal.style.background = ("--bg-color", color);
+  nav.style.background = ("--bg-color", color);
+  plus.style.stroke = ("--bg-color", color);
 };
 
 export default Navbar;
