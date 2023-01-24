@@ -1,12 +1,12 @@
 import React from "react";
 import axios from "axios";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 const Login = () => {
   const url = "http://localhost:5050/login";
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const [user, setUser] = useState(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -16,15 +16,32 @@ const Login = () => {
       };
 
       const resp = await axios.post(url, bodyFormData);
+      window.localStorage.setItem("loggedNoteappUser", JSON.stringify(user));
+      setUser(user.data.user);
+      setUsername("");
+      setPassword("");
       console.log(resp.data);
     } catch (error) {
       console.log(error.response);
     }
   };
-  return (
-    <>
+
+useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem("loggedNoteappUser");
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user.data.user);
+    }
+  }, []);
+  const hadndleLogout = () => {
+    setUsername(null);
+    window.localStorage.removeItem("loggedNoteappUser");
+  };
+  console.log(username);
+  console.log(user);
+    const loginForm = () => (
       <div className="flex w-full justify-center bg-[#F3F5F7] dark:bg-black h-screen">
-        <div className="flex w-[33%] items-center justify-center p-[2%]">
+        <div className="flex w-[40%] max-lg:w-[70%] max-md:w-[80%] max-sm:w-full max-sm:p-0 items-center justify-center p-[2%]">
           <form
             onSubmit={handleSubmit}
             className="relative flex w-full flex-col items-center rounded-lg dark:text-white bg-white dark:bg-[#16181C] p-[2%]"
@@ -80,10 +97,22 @@ const Login = () => {
                   ¿Olvidaste tu contraseña?
                 </h4>
               </a>
+                <div className="flex justify-center items-center gap-2">
+                <h4 className="text-xs text-blue-800 opacity-70">
+                  ¿No tenes cuenta? 
+                </h4>
+                <Link rel="stylesheet" to="/Register" ><span className="text-xs"> Registrare</span> </Link>
+                </div>
             </div>
           </form>
         </div>
-      </div>
+      </div>)
+
+
+
+  return (
+    <>
+      <div>{user === null ? loginForm() : logoutForm()}</div>
     </>
   );
 };
