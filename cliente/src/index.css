@@ -1,3 +1,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+
+/* 
+      .emoji-picker-react {
+        position: absolute;
+        top: -350px;
+        background-color: #080420;
+        box-shadow: 0 5px 10px #9a86f3;
+        border-color: #9a86f3;}
+        .emoji-scroll-wrapper::-webkit-scrollbar {
+          background-color: #080420;
+          width: 5px;
+         
+        }
+        .emoji-categories {
+        
+            filter: contrast(0);
+          
+        }
+        {
+          backgr.emoji-search ound-color: transparent;
+          border-color: #9a86f3;
+        }
+        .emoji-group:before {
+          background-color: #080420;
+        }
+      }
+    }
+  } */
+
