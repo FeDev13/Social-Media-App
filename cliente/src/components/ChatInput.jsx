@@ -40,8 +40,8 @@ export default function ChatInput({ handleSendMsg }) {
           onChange={(e) => setMsg(e.target.value)}
           value={msg}
         />
-        <button type="submit">
-          <IoMdSend />
+        <button type="submit" className="p-[0.3rem] rounded-[2rem] flex justify-center items-center border-none pl-[1rem] " id="button-chat">
+          <IoMdSend  />
         </button>
       </form>
     </Container>
@@ -52,7 +52,6 @@ const Container = styled.div`
   display: grid;
   align-items: center;
   grid-template-columns: 5% 95%;
-  background-color: #080420;
   padding: 0 2rem;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
     padding: 0 1rem;

@@ -13,10 +13,10 @@ export default function Welcome() {
     asyncFn();
   }, []);
   return (
-    <section className="flex justify-center items-center text-white flex-col">
+    <section className="flex justify-center items-center text-black dark:bg-[#22232c] flex-col bg-white dark:text-white">
       <img src={Robot} alt="" className="h-[20rem]" />
       <h1>
-        Welcome, <span className="text-[#4e0eff]">{userName}!</span>
+        Welcome, <span className="text">{userName}!</span>
       </h1>
       <h3>Please select a chat to Start messaging.</h3>
       </section>

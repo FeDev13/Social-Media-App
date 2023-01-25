@@ -21,17 +21,17 @@ export default function Contacts({ contacts, changeChat }) {
   return (
     <>
       {currentUserImage && currentUserImage && (
-        <section className=" grid grid-rows-[10%,75%,15%] overflow-hidden bg-[#080420]">
+        <section className=" grid grid-rows-[10%,75%,15%] overflow-hidden bg-white dark:bg-[#22232c] ">
           <div className="flex justify-center items-center gap-[1rem] ">
-            <h3 className="text-white font-bold " >SOCIAL MEDIA APP</h3>
+            <h3 className="text-black dark:text-white font-bold " >SOCIAL MEDIA APP</h3>
           </div>
-          <div className="flex flex-col items-center overflow-auto gap-[0.8rem]">
+          <div className="flex flex-col  overflow-auto gap-[0.8rem]">
             {contacts.map((contact, index) => {
               return (
                 <div
                   key={contact._id}
                   className={`contact ${
-                    index === currentSelected ? "bg-[#0c0331] w-full p-3 rounded-lg flex items-center justify-center gap-[2rem]" : "flex items-center justify-center gap-[2rem]"
+                    index === currentSelected ? "container w-full p-3 text-white dark:text-black flex items-center justify-center gap-[2rem]" : " text-black dark:text-white flex items-center justify-center gap-[2rem]"
                   }`}
                   onClick={() => changeCurrentChat(index, contact)}
                 >
@@ -41,21 +41,22 @@ export default function Contacts({ contacts, changeChat }) {
                       alt="" className="h-[4rem]"
                     />
                   </div>
-                  <div className="text-white font-light text-lg">
+                  <div className=" font-bold text-lg">
                     <h3>{contact.username}</h3>
                   </div>
                 </div>
               );
             })}
           </div>
-          <div className="flex items-center justify-center gap-[2rem] bg-[#0c0331]">
+          <div className="flex items-center justify-center gap-[2rem] container">
             <div className="">
               <img className="h-[4rem] inline"
                 src={`data:image/svg+xml;base64,${currentUserImage}`}
                 alt="avatar"
               />
             </div>
-            <div className="text-white">
+            <div className="text-white uppercase
+            ">
               <h2>{currentUserName}</h2>
             </div>
           </div>

@@ -72,8 +72,8 @@ export default function ChatContainer({ currentChat, socket }) {
   }, [messages]);
 
   return (
-    <Container>
-      <div className="flex justify-between items-center py-[2rem]">
+    <Container className="bg-white dark:bg-[#22232c] fondo" >
+      <div className=" flex justify-between items-center py-[2rem]">
         <div className="flex items-center gap-[1rem]">
           <div className="avatar">
             <img
@@ -111,8 +111,9 @@ export default function ChatContainer({ currentChat, socket }) {
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 10% 80% 10%;
+  grid-template-rows: 10% 75% 15%;
   gap: 0.1rem;
+  
   overflow: hidden;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
     grid-template-rows: 15% 70% 15%;
