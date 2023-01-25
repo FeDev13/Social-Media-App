@@ -32,3 +32,23 @@
     }
   } */
 
+.display-none{
+  @apply hidden;
+}
+
+#nav{
+  background-color: var(--bg-color);
+}
+#btn{
+  background-color: var(--bg-color);
+}
+#modal {
+  background-color: var(--bg-color);
+}
+
+.plus{
+  stroke: var(--bg-color);
+}
+.color-item{
+  background-color: var(--bg-color);
+}

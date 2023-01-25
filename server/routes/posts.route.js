@@ -1,13 +1,13 @@
 const express = require("express");
-const router = express.Router();
+const routerPost = express.Router();
 
 const {  friendPost,createPost,getPost,likePost,comentPost} = require('../controllers/postsController');
 
 
-router.post('/posts/', createPost);
-router.get('/posts/:username', getPost);
-router.get('/posts/:id', friendPost);
-router.put('/posts/:id/like', likePost);
-router.put('/posts/:id/comment', comentPost);
+routerPost.post('/posts/', createPost);
+routerPost.get('/posts/:username', getPost);
+routerPost.get('/posts/:id', friendPost);
+routerPost.put('/posts/:id/like', likePost);
+routerPost.put('/posts/:id/comment', comentPost);
 
-module.exports=router;
+module.exports=routerPost;

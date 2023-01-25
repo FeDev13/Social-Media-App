@@ -1,4 +1,4 @@
-const User = require("../models/users.models");
+const {User} = require("../models/users.models");
 const bcrypt = require("bcrypt");
 
 module.exports.login = async (req, res, next) => {
@@ -82,4 +82,20 @@ module.exports.logOut = (req, res, next) => {
   } catch (ex) {
     next(ex);
   }
+};
+
+module.exports.getUsers = async (req, res) => {
+  const user = await User.find();
+  res.json(user);
+};
+
+module.exports.findByUser = async (req, res) => {
+  const { id } = req.params;
+  User.findById(id)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch(() => {
+      res.json({ message: "Id no encontrado" });
+    });
 };

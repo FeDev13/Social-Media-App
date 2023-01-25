@@ -6,7 +6,7 @@ import HomeCenter from "./HomeCenter";
 const MainHome = () => {
   return (
     <>
-      <section className="flex w-[100%] justify-center h-[100%] my-20">
+      <section className="flex w-[100%] justify-center h-[100%] my-20 ">
         <Aside />
         <HomeCenter/>
         <AsideRight/>

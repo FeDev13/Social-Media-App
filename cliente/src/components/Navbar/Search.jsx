@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 
 export function Search() {
-  const url = "http://localhost:5000/users";
+  const url = "http://localhost:5050/users";
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export function Search() {
         ) {
           return (
            
-              <div className="w-[15%] border p-2 gap-3">
+              <div className="w-[15%] border dark:border-black p-2 gap-3 dark:text-white bg-white dark:bg-[#16181C]  rounded-lg">
                 <div className="flex flex-col justify-center">
                   <div className="relative flex justify-center">
                     <img

@@ -5,14 +5,16 @@ import { Link } from "react-router-dom";
 import NavSearch from "./NavSearch";
 import "tw-elements";
 import ColorItem from "../Home/color-item";
+import Toggle from "./Toggle";
 
 const Navbar = () => {
- 
-  // let btn = document.getElementById("btn");
-  // let modal = document.getElementById("modal");
-  // let nav = document.getElementById("nav");
-  // let plus = document.getElementById("plus");
+  let btn = document.getElementById("btn");
+  let modal = document.getElementById("modal");
+  let nav = document.getElementById("nav");
+  let plus = document.getElementById("plus");
   const colors = ["#ff6961", "#2ABA7D", "#fdfd96", "#84b6f4", "#fdcae1"];
+
+  
 
   const setColor = (event) => {
     const currentColor = event.target.style.getPropertyValue("--bg-color");
@@ -26,41 +28,22 @@ const Navbar = () => {
     setTheme(currentColor);
   });
 
-  const [searchState, setSearchState] = useState(false);
-  const [hamState, setHamState] = useState(false);
-  const [menuState, setMenuState] = useState(false);
-
-  const [theme, setThemes] = useState("");
-  useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [theme]);
-
-  const handelThemeSwitch = () => {
-    setThemes(theme === "dark" ? "light" : "dark");
-    localStorage.setItem("theme", theme);
-  };
-
-  useEffect(() => {
-    const currentColor = localStorage.getItem("theme");
-    setThemes(currentColor);
-  });
+  // const [searchState, setSearchState] = useState(false);
+  // const [hamState, setHamState] = useState(false);
+  // const [menuState, setMenuState] = useState(false);
 
   return (
     <div
       id="nav"
-      className="fixed top-0 z-10 flex w-[100%] items-center justify-between bg-black  p-6 max-lg:px-6 "
+      className="fixed top-0 z-10 flex w-[100%] items-center justify-between p-6 max-lg:px-6 "
     >
       <div className="flex">
         <div className="flex items-center max-sm:hidden">
+        <Link to="/">
           <h1 className="pl-8 text-3xl uppercase text-white max-xl:text-2xl max-lg:p-0 max-lg:text-xl">
             Social media app
           </h1>
+          </Link>
         </div>
         {/* <div
           className="grid h-11 w-11 place-content-center rounded-full bg-white lg:hidden lg:w-6"
@@ -150,67 +133,50 @@ const Navbar = () => {
               d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
             />
           </svg>
-        
         </button>
 
         <div
-          class="modal fade z- fixed top-[40%] left-0 hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+          className="modal fade z- fixed top-[40%] left-0 hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
           id="exampleModalCenter"
           tabindex="-1"
           aria-labelledby="exampleModalCenterTitle"
           aria-modal="true"
           role="dialog"
         >
-          <div class="modal-dialog modal-dialog-centered pointer-events-none relative w-auto">
-            <div class="modal-content pointer-events-auto relative m-auto flex w-[50%] flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-xl  outline-none dark:bg-[#16181C] dark:text-white max-lg:w-[70%] max-md:w-[90%]">
-              <div class="modal-header flex flex-shrink-0 items-center justify-between rounded-t-md border-b border-gray-200 p-4">
+          <div className="modal-dialog modal-dialog-centered pointer-events-none relative w-auto">
+            <div className="modal-content pointer-events-auto relative m-auto flex w-[50%] flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-xl  outline-none dark:bg-[#16181C] dark:text-white max-lg:w-[70%] max-md:w-[90%]">
+              <div className="modal-header flex flex-shrink-0 items-center justify-between rounded-t-md border-b border-gray-200 p-4">
                 <h5
-                  class="text-xl font-medium leading-normal text-gray-800 dark:text-white"
+                  className="text-xl font-medium leading-normal text-gray-800 dark:text-white"
                   id="exampleModalScrollableLabel"
                 >
                   Personaliza tu visualización
                 </h5>
                 <button
                   type="button"
-                  class="btn-close box-content h-4 w-4 rounded-none border-none p-1 text-black opacity-50 hover:text-black hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+                  className="btn-close box-content h-4 w-4 rounded-none border-none p-1 text-black opacity-50 hover:text-black hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-body relative p-4">
+              <div className="modal-body relative p-4">
                 <div className="flex flex-wrap gap-6 p-3 max-sm:py-0">
                   <h1>Colors:</h1>
                   {colors.map((color, idx) => (
                     <ColorItem key={idx} setColor={setColor} color={color} />
                   ))}
                 </div>
-                <div className="flex gap-6 p-3">
+                <div className="flex gap-6 p-3 items-center">
                   <h1>Thema:</h1>
-                  <a className="link" onClick={handelThemeSwitch}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="h-6 w-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d={ theme === "dark" ? "M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" : "M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" }
-                      />
-                    </svg>
-                   
-
-                  </a>
+                    <Toggle />
+                  
                 </div>
               </div>
-              <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t border-gray-200 p-4">
+              <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t border-gray-200 p-4">
                 <button
                   type="button"
                   id="modal"
-                  class="inline-block rounded px-6  py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md  transition duration-150 ease-in-out hover:shadow-lg  focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
+                  className="inline-block rounded px-6  py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md  transition duration-150 ease-in-out hover:shadow-lg  focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
                   data-bs-dismiss="modal"
                 >
                   Aceptar
@@ -258,20 +224,20 @@ const Navbar = () => {
 
       <div className="flex gap-8 rounded-3xl pr-16 max-lg:p-0">
         <Link to="/chat">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="white"
-          className="h-6 w-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
-          />
-        </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="white"
+            className="h-6 w-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
+            />
+          </svg>
         </Link>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -315,9 +281,8 @@ const Navbar = () => {
   );
 };
 const setTheme = (color) => {
-  
   document.documentElement.style.setProperty("--bg-color", color);
-  // btn.style.background = ("--bg-color", color);
+
   // modal.style.background = ("--bg-color", color);
   // nav.style.background = ("--bg-color", color);
   // plus.style.stroke = ("--bg-color", color);

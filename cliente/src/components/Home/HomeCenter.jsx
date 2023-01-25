@@ -1,11 +1,10 @@
 import React from "react";
-import { useState, useEffect } from "react";
 const HomeCenter = () => {
 
 
   return (
     <div className="w-[65%] py-[2%] px-[2%]  max-ms:px-0 flex-col gap-y-8 max-md:pl-0 max-lg:w-[70%] flex max-sm:w-[95%] h-[50%]">
-      <div className=" w-[100%] p-[2%] max-lg:p-0  flex rounded-lg shadow-lg dark:text-white bg-white dark:bg-[#16181C] flex-col">
+      <div className=" w-[100%] p-[2%] max-lg:p-0  flex rounded-lg shadow-lg dark:text-white  dark:bg-[#16181C] flex-col">
         <div className="flex h-16 w-full p-2">
           <div className="flex  w-full items-center gap-4 relative  ">
             <img
@@ -100,7 +99,7 @@ const HomeCenter = () => {
             />
           </svg>
           <input
-            className="w-full text-sm pl-8 pr-16 p-2 rounded-lg outline-none bg-gray-100"
+            className="w-full text-sm pl-8 pr-16 p-2 rounded-lg outline-none bg-gray-100 dark:bg-transparent dark:border-[1px] dark:border-white"
             placeholder="Write your comment"
           />
           <svg
@@ -109,7 +108,7 @@ const HomeCenter = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="top-7 right-8 absolute w-4 h-4 opacity-70"
+            className="top-8 right-8 absolute w-4 h-4 opacity-70"
           >
             <path
               strokeLinecap="round"
@@ -223,7 +222,7 @@ const HomeCenter = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="top-7 right-8 absolute w-4 h-4 opacity-70"
+            className="top-8 right-8 absolute w-4 h-4 opacity-70"
           >
             <path
               strokeLinecap="round"

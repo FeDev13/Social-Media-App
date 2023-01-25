@@ -8,7 +8,7 @@ const Aside = () => {
           <div className="relative w-[100%] ">
             <input
               type="search"
-              className="w-[100%] text-sm pl-8 p-2 rounded-lg outline-none bg-gray-100"
+              className="w-[100%] text-sm pl-8 p-2 rounded-lg outline-none bg-gray-100 dark:bg-transparent dark:border-[1px] dark:border-white"
               placeholder="Search People"
             />
             <svg
@@ -52,8 +52,8 @@ const Aside = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="blue"
-                className="w-6 h-6 "
-                id="plus"
+                className="w-6 h-6 plus"
+              
               >
                 <path
                   strokeLinecap="round"
@@ -86,7 +86,7 @@ const Aside = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="blue"
-                className="w-6 h-6 "
+                className="w-6 h-6 plus"
               >
                 <path
                   strokeLinecap="round"
@@ -119,7 +119,7 @@ const Aside = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="blue"
-                className="w-6 h-6"
+                className="w-6 h-6 plus"
               >
                 <path
                   strokeLinecap="round"
@@ -152,7 +152,7 @@ const Aside = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="blue"
-                className="w-6 h-6"
+                className="w-6 h-6 plus"
               >
                 <path
                   strokeLinecap="round"
@@ -185,7 +185,7 @@ const Aside = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="blue"
-                className="w-6 h-6"
+                className="w-6 h-6 plus"
               >
                 <path
                   strokeLinecap="round"
@@ -352,7 +352,7 @@ const Aside = () => {
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
-                stroke="black"
+                stroke="blue"
                 className="w-6 h-6"
               >
                 <path

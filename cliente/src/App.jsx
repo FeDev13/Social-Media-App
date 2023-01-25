@@ -6,18 +6,29 @@ import SetAvatar from "./components/SetAvatar";
 import Chat from "./pages/Chat";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import { Search } from './components/Navbar/Search';
+import { ThemeProvider } from './components/Navbar/ThemeContext';
 export default function App() {
+  
   return (
+
     <>
+<div>
+<ThemeProvider>
     <BrowserRouter>
+
       <Routes>
+
       <Route path="/" element={[<div > <Navbar/>,<Home/></div>]} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/setAvatar" element={<SetAvatar />} />
+        <Route path="/Search/:buscar" element={<Search />} />
         <Route path="/chat" element={[<Navbar/>, <Chat />]} />
       </Routes>
     </BrowserRouter>
+    </ThemeProvider>
+    </div>
     </>
   );
 }
