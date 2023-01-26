@@ -15,7 +15,7 @@ function App() {
      <BrowserRouter>
      <div className=' bg-white dark:bg-black h-screen'>
         <Routes>
-        <Route path="/" element={[<div > <Navbar/>,<Home/></div>]} />
+        <Route path="/" element={[<div > {/* <Navbar/> */},<Home/></div>]} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/Profile" element={<UserProfile />} />

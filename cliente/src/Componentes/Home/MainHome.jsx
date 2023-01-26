@@ -8,9 +8,6 @@ const MainHome = () => {
   return (
     <>
       <section className="my-20 flex h-[100%] w-[100%] justify-center">
-        <Card />
-      </section>
-      <section className="my-20 flex h-[100%] w-[100%] justify-center">
         <Aside />
         <HomeCenter />
         <AsideRight />

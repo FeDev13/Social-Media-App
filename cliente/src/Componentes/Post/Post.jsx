@@ -16,7 +16,7 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`/posts/:username=${post.userId}`);
+      const res = await axios.get(`http://localhost:5050/posts/:username=${post.userId}`);
       setUser(res.data);
     };
     fetchUser();
@@ -25,7 +25,7 @@ const Post = ({ post }) => {
   //funcion de likes
   const likeHandler = () => {
     try {
-      axios.put("/posts/" + post._id + "/like", { userId: currentUser._id }); //ruta del like
+      axios.put("http://localhost:5050/posts/" + post._id + "/like", { userId: currentUser._id }); //ruta del like
     } catch (err) {}
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);

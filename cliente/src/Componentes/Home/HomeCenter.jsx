@@ -13,7 +13,7 @@ export function HomeCenter({ username }) {
   useEffect(() => {
     const fetchPosts = async () => {
       const res = username
-         await axios.get("/posts/:username")
+         await axios.get("http://localhost:5050/posts/:username") //ruta de los posteos
         
       setPosts(
         res.data.sort((p1, p2) => {
