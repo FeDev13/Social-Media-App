@@ -28,17 +28,18 @@ export default function ChatInput({ handleSendMsg }) {
   return (
     <Container>
       <div className="button-container">
-        <div className="emoji">
+        {/* <div className="emoji">
           <BsEmojiSmileFill onClick={handleEmojiPickerhideShow} />
           {showEmojiPicker && <Picker onEmojiClick={handleEmojiClick} />}
-        </div>
+        </div> */}
       </div>
-      <form className="input-container" onSubmit={(event) => sendChat(event)}>
+      <form className="input-container " onSubmit={(event) => sendChat(event)}>
         <input
           type="text"
           placeholder="type your message here"
           onChange={(e) => setMsg(e.target.value)}
           value={msg}
+          className='dark:text-white'
         />
         <button type="submit" className="p-[0.3rem] rounded-[2rem] flex justify-center items-center border-none pl-[1rem] " id="button-chat">
           <IoMdSend  />
@@ -103,12 +104,12 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     gap: 2rem;
-    background-color: #ffffff34;
+    background-color: white;
     input {
       width: 90%;
       height: 60%;
       background-color: transparent;
-      color: white;
+      color: black;
       border: none;
       padding-left: 1rem;
       font-size: 1.2rem;

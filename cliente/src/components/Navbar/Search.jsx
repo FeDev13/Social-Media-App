@@ -29,11 +29,11 @@ export function Search() {
           return (
            
               <div className="w-[15%] border dark:border-black p-2 gap-3 dark:text-white bg-white dark:bg-[#16181C]  rounded-lg">
-                <div className="flex flex-col justify-center">
+                <div className="flex gap-2 border-search rounded-lg p-2 flex-col justify-center">
                   <div className="relative flex justify-center">
                     <img
-                      src="https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000"
-                      className="relative h-[90%] rounded-lg"
+                       src={`data:image/svg+xml;base64,${Element.avatarImage}`}
+                      className="relative h-[10%] w-[70%] rounded-lg"
                       alt=""
                     />
                     <img
@@ -45,7 +45,7 @@ export function Search() {
                   <h1 className="text-center text-lg font-bold">
                     {Element.fullname}
                   </h1>
-                  <h3 className="text-center text-xs font-extralight">
+                  <h3 className="text-center text-xs font-bold">
                     @{Element.username}
                   </h3>
                   <div className="my-3 flex w-[100%]">

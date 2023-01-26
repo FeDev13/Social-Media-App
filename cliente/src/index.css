@@ -63,13 +63,14 @@
   background-color: var(--bg-color);
 }
 .fondo{
-  background:
-  radial-gradient(circle at 0% 50%, rgba(96, 16, 48, 0) 9px,  var(--bg-color) 10px, rgba(96, 16, 48, 0) 11px) 0px 10px,
-  radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px,  var(--bg-color) 10px, rgba(96, 16, 48, 0) 11px),white;
-  background-size: 20px 20px;
+  background-color: rgb(245, 244, 242);
 }
 .border{
   border-color: transparent;
+}
+.border-search{
+  border: 2px solid  ;
+  border-color: var(--bg-color); 
 }
 .border:focus{
   border: 2px solid  ;

@@ -21,9 +21,9 @@ export default function Contacts({ contacts, changeChat }) {
   return (
     <>
       {currentUserImage && currentUserImage && (
-        <section className=" grid grid-rows-[10%,75%,15%] overflow-hidden bg-white dark:bg-[#22232c] ">
-          <div className="flex justify-center items-center gap-[1rem] ">
-            <h3 className="text-black dark:text-white font-bold " >SOCIAL MEDIA APP</h3>
+        <section className=" grid grid-rows-[10%,75%,15%] mt-5 overflow-hidden bg-white dark:bg-[#22232c] ">
+          <div className="flex justify-center items-center mt-4 gap-[2rem] ">
+            <h3 className="text-black dark:text-white font-bold " >CHATS</h3>
           </div>
           <div className="flex flex-col  overflow-auto gap-[0.8rem]">
             {contacts.map((contact, index) => {

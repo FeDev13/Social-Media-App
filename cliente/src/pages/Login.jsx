@@ -160,32 +160,19 @@ const notActiveBtnStyles =
   
       {/* botones */}
       <div className="text-center mb-7">
-        <button
-          type="button"
-          onClick={(e) => {
-  
-            setText(e.target.textContent);
-            setActiveBtn("Mensaje");
-          }}
-          className={` dark:text-white ${
-            activeBtn === "Mensaje" ? activeBtnStyles : notActiveBtnStyles
-          }`} 
-        >
-      Mensaje
-        </button>
+      {/* <Link to='/chat' className="py-3 px-6 container rounded-lg ">
         <button
           type="button"
           onClick={(e) => {
             setText(e.target.textContent);
             setActiveBtn("share");
           }}
-          className={` dark:text-white ${
-            activeBtn === "share" ? activeBtnStyles : notActiveBtnStyles
-          }`}
+       
         >
-          Compartir perfil
+          Mensajes
         </button>
-        <Link to="/"><Logout/></Link>
+        </Link > */}
+        <Link to="/" className=""><Logout/></Link>
         {/* <a href="/Login"> */}
         {/* <button  onClick={hadndleLogout} className="dark:text-white bg-blue-600 text-white font-bold p-2 rounded-lg shadow-lg w-40 outline-none">salir</button></a> */}
       </div>

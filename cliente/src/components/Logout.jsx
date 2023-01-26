@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { BiPowerOff } from "react-icons/bi";
 import styled from "styled-components";
 import axios from "axios";
 import { logoutRoute } from "../utils/APIRoutes";
@@ -17,8 +16,8 @@ export default function Logout() {
     }
   };
   return (
-    <button className="flex justify-center items-center p-[0.5rem] rounded-lg bg-[#9a86f3] border-none cursor-pointer " onClick={handleClick}>
-      <BiPowerOff />
+    <button className="flex justify-center m-auto items-center p-[0.5rem] w-[20%] rounded-lg  container  border-none cursor-pointer " onClick={handleClick}>
+     Salir
     </button>
   );
 }
