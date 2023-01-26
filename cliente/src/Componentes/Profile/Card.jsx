@@ -15,6 +15,8 @@ const Card = () => {
       desc: desc.current.value,
     };
 
+    
+  //imagen
     if (file) {
       const data = new FormData();
       const fileName = Date.now() + file.name;
@@ -23,7 +25,7 @@ const Card = () => {
       newPost.img = fileName;
       console.log(newPost);
       try {
-        await axios.post("/upload", data);
+        await axios.post("/posts", data);
       } catch (err) {}
     }
     try {
@@ -44,7 +46,7 @@ const Card = () => {
         ref={desc}
       />
       <div className=" flex">
-        <button
+        <button onClick={submitPost}
           type="button"
           id="btn"
           className="mt-8 ml-10 rounded bg-black px-6 py-2.5 text-xs
