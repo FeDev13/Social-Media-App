@@ -86,39 +86,39 @@ export default function Register() {
 
   return (
     <>
-      <section className=" flex flex-col justify-center gap-[1rem] items-center bg-[#131324]">
-        <form action="" className="flex flex-col gap-[2rem] rounded-lg py-[3rem] px-[5rem] " onSubmit={(event) => handleSubmit(event)}>
+      <section className=" flex flex-col w-full h-screen justify-center gap-[1rem] items-center bg-[#131324]">
+        <form action="" className="flex flex-col gap-[2rem] rounded-lg  bg-[#00000076] p-[5rem] " onSubmit={(event) => handleSubmit(event)}>
           <div className="flex items-center gap-[1rem] justify-center">
        
-            <h1 className="text-white uppercase">snappy</h1>
+            <h1 className="text-white uppercase font-bold text-lg">social media app</h1>
           </div>
-          <input  className=" bg-transparent p-[1rem] text-white w-full text-[1rem] border-yellow-300 border-2 focus:outline-none focus:border-white"
+          <input  className=" bg-transparent p-[1rem] rounded-lg text-white w-full text-[1rem] border focus:outline-none "
             type="text"
             placeholder="Username"
             name="username"
             onChange={(e) => handleChange(e)}
           />
-          <input  className=" bg-transparent p-[1rem] text-white w-full text-[1rem] border-yellow-300 border-2 focus:outline-none focus:border-white"
+          <input  className=" bg-transparent p-[1rem] rounded-lg text-white w-full text-[1rem]  border focus:outline-none "
             type="email"
             placeholder="Email"
             name="email"
             onChange={(e) => handleChange(e)}
           />
-          <input  className=" bg-transparent p-[1rem] text-white w-full text-[1rem] border-yellow-300 border-2 focus:outline-none focus:border-white"
+          <input  className=" bg-transparent p-[1rem] text-white rounded-lg w-full text-[1rem] border focus:outline-none"
             type="password"
             placeholder="Password"
             name="password"
             onChange={(e) => handleChange(e)}
           />
-          <input className=" bg-transparent p-[1rem] text-white w-full text-[1rem] border-yellow-300 border-2 focus:outline-none focus:border-white"
+          <input className=" bg-transparent p-[1rem] text-white rounded-lg w-full text-[1rem]  border focus:outline-none "
             type="password"
             placeholder="Confirm Password"
             name="confirmPassword"
             onChange={(e) => handleChange(e)}
           />
-          <button type="submit" className="bg-[#4e0eff] text-white py-[1rem] border-none font-bold cursor-pointer uppercase text-[1rem] hover:bg-[#4e0eff] px-[2rem]">Create User</button>
+          <button type="submit" className="container   text-white py-[1rem]  border font-bold cursor-pointer uppercase text-[1rem] px-[2rem]">Create User</button>
           <span className="uppercase text-white">
-            Already have an account ? <Link to="/login" className="text-[#4e0eff] font-bold">Login.</Link>
+            Already have an account ? <Link to="/login" className="text font-bold">Login.</Link>
           </span>
         </form>
       </section>

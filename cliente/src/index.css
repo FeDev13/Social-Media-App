@@ -68,3 +68,10 @@
   radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px,  var(--bg-color) 10px, rgba(96, 16, 48, 0) 11px),white;
   background-size: 20px 20px;
 }
+.border{
+  border-color: transparent;
+}
+.border:focus{
+  border: 2px solid  ;
+  border-color: var(--bg-color);
+}

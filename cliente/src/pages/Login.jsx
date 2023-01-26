@@ -23,6 +23,17 @@ const notActiveBtnStyles =
   const navigate = useNavigate();
   const [values, setValues] = useState({ username: "", password: "" });
   const [user, setUser] = useState(null);
+  const [currentUserImage, setCurrentUserImage] = useState(undefined);
+  const [currentUserName, setCurrentUserName] = useState(undefined);
+  useEffect( () => {
+    const asyncFn = async () => { const data = await JSON.parse(
+      localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
+    );
+    setCurrentUserName(data.username);
+    setCurrentUserImage(data.avatarImage); };
+    asyncFn();
+  }, []);
+
   const toastOptions = {
     position: "bottom-right",
     autoClose: 8000,
@@ -92,20 +103,20 @@ const notActiveBtnStyles =
         type="text"
         placeholder="Username"
         name="username"
-        className="bg-transparent p-[1rem] border-solid rounded-lg w-full text-white"
+        className="bg-transparent p-[1rem] border-solid rounded-lg w-full outline-none border text-white"
         onChange={(e) => handleChange(e)}
         min="3"
       />
       <input
         type="password"
         placeholder="Password"
-        className="bg-transparent p-[1rem] border-solid rounded-lg w-full"
+        className="bg-transparent p-[1rem] border-solid rounded-lg w-full border text-white outline-none"
         name="password"
         onChange={(e) => handleChange(e)}
       />
-      <button type="submit" className="bg-[#4e0eff] px-[2rem] py-[1rem] border-none font-bold cursor-pointer rounded-lg text-lg text-white uppercase hover:bg-[#4e0eff]">Log In</button>
+      <button type="submit" className="container px-[2rem] py-[1rem] border-none font-bold cursor-pointer rounded-lg text-lg text-white uppercase ">Log In</button>
       <span className="text-white uppercase">
-        Don't have an account ? <Link to="/register">Create One.</Link>
+        Don't have an account ? <Link to="/register" className="text">Create One.</Link>
       </span>
     </form>
   </section>
@@ -127,19 +138,19 @@ const notActiveBtnStyles =
           className="w-full h-60 2xl:h-510 shadow-lg object-cover rounded-lg"
         />
         <img
-          src={userimage}
+          src={`data:image/svg+xml;base64,${currentUserImage}`}
           className="rounded-full w-40 h-40 -mt-10 shadow-2xl object-cover"
           alt=""
         />
         <h1 className="font-bold text-3xl text-center mt-3 mb-10">
-          Usuario anonimo
+          {currentUserName}
         </h1>{" "}
         <h5 className=" text-center mb-8 mt-0">
           {" "}
           Mar del Plata, Argentina
         </h5>
         <div className=" flex flex-row mt-0 mb-10">
-          @user
+          @{currentUserName}
           <li className=" mx-8">Trabajo actual</li>
           <li>Algo mas</li>
         </div>
