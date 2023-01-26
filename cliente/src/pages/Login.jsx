@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { loginRoute } from "../utils/APIRoutes";
 import Navbar from "../components/Navbar/Navbar";
+import Logout from "../components/Logout";
 
 export default function Login() {
   const [activeBtn, setActiveBtn] = useState("Mensaje");
@@ -114,7 +115,7 @@ const notActiveBtnStyles =
         name="password"
         onChange={(e) => handleChange(e)}
       />
-      <button type="submit" className="container px-[2rem] py-[1rem] border-none font-bold cursor-pointer rounded-lg text-lg text-white uppercase ">Log In</button>
+      <button type="submit" className="container  px-[2rem] py-[1rem] border-none font-bold cursor-pointer rounded-lg text-lg text-white uppercase ">Log In</button>
       <span className="text-white uppercase">
         Don't have an account ? <Link to="/register" className="text">Create One.</Link>
       </span>
@@ -184,6 +185,7 @@ const notActiveBtnStyles =
         >
           Compartir perfil
         </button>
+        <Link to="/"><Logout/></Link>
         {/* <a href="/Login"> */}
         {/* <button  onClick={hadndleLogout} className="dark:text-white bg-blue-600 text-white font-bold p-2 rounded-lg shadow-lg w-40 outline-none">salir</button></a> */}
       </div>

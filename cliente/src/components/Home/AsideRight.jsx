@@ -1,7 +1,18 @@
 import React from "react";
 import "tw-elements";
+import { useState, useEffect } from "react";
 
 const AsideRight = () => {
+  const [currentUserImage, setCurrentUserImage] = useState(undefined);
+  const [currentUserName, setCurrentUserName] = useState(undefined);
+  useEffect( () => {
+    const asyncFn = async () => { const data = await JSON.parse(
+      localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
+    );
+    setCurrentUserName(data.username);
+    setCurrentUserImage(data.avatarImage); };
+    asyncFn();
+  }, []);
   return (
     <>
       <div className="flex  w-[15%] flex-col gap-y-5 pt-[1.6%] max-lg:w-[25%] max-sm:hidden">
@@ -15,26 +26,26 @@ const AsideRight = () => {
                   alt=""
                 />
                 <img
-                  src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"
+                  src={`data:image/svg+xml;base64,${currentUserImage}`}
                   className="absolute bottom-0 w-[20%] rounded-lg "
                   alt=""
                 />
               </div>
-              <h1 className="text-center text-lg font-bold">Username</h1>
-              <h3 className="text-center text-xs font-extralight">@username</h3>
+              <h1 className="text-center text-lg font-bold">{currentUserName}</h1>
+              <h3 className="text-center text-xs font-extralight">@{currentUserName}</h3>
               <div className="my-3 flex w-[100%]">
                 <div className="flex w-[33%] flex-col items-center">
-                  <h1 className="text-lg font-bold">100</h1>
+                  <h1 className="text-lg font-bold">0</h1>
                   <h3 className="text-xs font-extralight opacity-60">Post</h3>
                 </div>
                 <div className="flex w-[33%] flex-col items-center">
-                  <h1 className="text-lg font-bold">100</h1>
+                  <h1 className="text-lg font-bold">10</h1>
                   <h3 className="text-xs font-extralight opacity-60">
                     Followers
                   </h3>
                 </div>
                 <div className="flex w-[33%] flex-col items-center">
-                  <h1 className="text-lg font-bold">100</h1>
+                  <h1 className="text-lg font-bold">5</h1>
                   <h3 className="text-xs font-extralight opacity-60">
                     Following
                   </h3>
