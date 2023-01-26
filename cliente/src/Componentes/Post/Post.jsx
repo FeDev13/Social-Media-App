@@ -1,41 +1,41 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
-import Post from "../Post/Post";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
+import axios from "axios";
 
-export function HomeCenter({ username }) {
-  const [posts, setPosts] = useState([]);
-  const { user } = useContext(AuthContext);
+const Post = ({ post }) => {
+  const [like, setLike] = useState(post.likes.length); //cuenta los likes
+  const [isLiked, setIsLiked] = useState(false);
+  const [user, setUser] = useState({});
+  const { user: currentUser } = useContext(AuthContext);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const res = username
-        ? await axios.get("/posts/profile/" + username)
-        : await axios.get("posts/timeline/" + user._id);
-      setPosts(
-        res.data.sort((p1, p2) => {
-          return new Date(p2.createdAt) - new Date(p1.createdAt);
-        })
-      );
+    setIsLiked(post.likes.includes(currentUser._id));
+  }, [currentUser._id, post.likes]);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await axios.get(`/users?userId=${post.userId}`);
+      setUser(res.data);
     };
-    fetchPosts();
-  }, [username, user._id]);
+    fetchUser();
+  }, [post.userId]);
+
+  //funcion de likes
+  const likeHandler = () => {
+    try {
+      axios.put("/posts/" + post._id + "/like", { userId: currentUser._id }); //ruta del like
+    } catch (err) {}
+    setLike(isLiked ? like - 1 : like + 1);
+    setIsLiked(!isLiked);
+  };
 
   return (
-    //trae todos los posts de los users
-    <>
-      {(!username || username === user.username) && <Share />}
-      {posts.map((p) => (
-        <Post key={p._id} post={p} />
-      ))}
-    </>
-    /*  <div className="max-ms:px-0 flex h-[50%]  w-[65%] flex-col gap-y-8 py-[2%] px-[2%] max-lg:w-[70%] max-md:pl-0 max-sm:w-[95%]">
+    <div className="max-ms:px-0 flex h-[50%]  w-[65%] flex-col gap-y-8 py-[2%] px-[2%] max-lg:w-[70%] max-md:pl-0 max-sm:w-[95%]">
       <div className=" flex w-[100%] flex-col  rounded-lg bg-white p-[2%] shadow-lg dark:bg-[#16181C] dark:text-white max-lg:p-0">
         <div className="flex h-16 w-full p-2">
-        
-          <div className="relative  flex w-full items-center gap-4  ">
+          <div className="relative  flex w-full cursor-pointer items-center gap-4">
             <img
               src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
               className="h-12 w-12 rounded-lg"
@@ -60,7 +60,7 @@ export function HomeCenter({ username }) {
               <div className="flex gap-4">
                 <h4 className="text-xs text-blue-800">Ubicacion</h4>
                 <h4 className="text-xs font-extralight opacity-70">
-                  3 hours ago
+                  2 hours ago
                 </h4>
               </div>
             </div>
@@ -78,6 +78,7 @@ export function HomeCenter({ username }) {
         <div className="flex w-full items-center gap-6 border-t-2 p-[2%]  ">
           <div className="flex items-center gap-2">
             <svg
+              onClick={likeHandler}
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -259,6 +260,8 @@ export function HomeCenter({ username }) {
           </svg>
         </div>
       </div>
-    </div> */
+    </div>
   );
-}
+};
+
+export default Post;

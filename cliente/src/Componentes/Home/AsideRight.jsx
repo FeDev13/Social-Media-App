@@ -1,17 +1,12 @@
 import React from "react";
 import "tw-elements";
 
-
-
-
 const AsideRight = () => {
-
-
   return (
     <>
       <div className="flex  w-[15%] flex-col gap-y-5 pt-[1.6%] max-lg:w-[25%] max-sm:hidden">
         <div className="fixed flex w-[15%]  justify-center max-lg:w-[25%]">
-          <div className="flex w-full flex-col rounded-lg bg-white p-3 shadow-lg dark:text-white dark:bg-[#16181C] ">
+          <div className="flex w-full flex-col rounded-lg bg-white p-3 shadow-lg dark:bg-[#16181C] dark:text-white ">
             <div className="flex flex-col justify-center">
               <div className="relative flex justify-center">
                 <img
@@ -62,33 +57,6 @@ const AsideRight = () => {
                   d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
                 />
               </svg> */}
-
-                <button
-                  type="button"
-                id="btn"
-              
-                  class="w-full rounded
-                
-bg-black
-      px-6
-      py-2.5
-      text-xs
-      font-medium
-      uppercase
-      leading-tight
-      text-white
-      shadow-md
-      transition duration-150
-      ease-in-out  hover:shadow-lg 
-      focus:shadow-lg focus:outline-none
-      focus:ring-0
-     
-      active:shadow-lg"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  Create Post
-                </button>
               </div>
 
               <div
@@ -100,7 +68,7 @@ bg-black
               >
                 <div className="flex h-full w-full items-center justify-center bg-slate-500 bg-opacity-40 ">
                   <div class="modal-dialog pointer-events-none relative w-[50%]">
-                    <div class="modal-content pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white dark:bg-[#16181C] bg-clip-padding text-current shadow-lg outline-none">
+                    <div class="modal-content pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-[#16181C]">
                       <div class="modal-header flex flex-shrink-0 items-center justify-between rounded-t-md border-b border-gray-200 p-4">
                         <h5
                           class="text-xl font-medium leading-normal text-gray-800"
@@ -137,7 +105,7 @@ bg-black
                           />
                         </div>
                       </div>
-                     
+
                       <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t border-gray-200 p-4">
                         <button
                           type="button"
@@ -240,7 +208,5 @@ bg-black
     </>
   );
 };
-
-
 
 export default AsideRight;
