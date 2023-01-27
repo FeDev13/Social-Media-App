@@ -5,33 +5,32 @@ import { useState, useEffect } from "react";
 const AsideRight = () => {
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentUserName, setCurrentUserName] = useState(undefined);
+  const [currentMail, setCurrentMail] = useState(undefined);
   useEffect( () => {
     const asyncFn = async () => { const data = await JSON.parse(
       localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
     );
     setCurrentUserName(data.username);
-    setCurrentUserImage(data.avatarImage); };
+    setCurrentUserImage(data.avatarImage);
+    setCurrentMail(data.email);
+  };
     asyncFn();
   }, []);
   return (
     <>
-      <div className="flex  w-[15%] flex-col gap-y-5 pt-[1.6%] max-lg:w-[25%] max-sm:hidden">
+      <div className="flex  w-[15%] flex-col gap-y-5 pt-[2%] max-lg:w-[25%] max-sm:hidden">
         <div className="fixed flex w-[15%]  justify-center max-lg:w-[25%]">
           <div className="flex w-full flex-col rounded-lg bg-white p-3 shadow-lg dark:text-white dark:bg-[#16181C] ">
             <div className="flex flex-col justify-center">
               <div className="relative flex justify-center">
-                <img
-                  src="https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000"
-                  className="relative h-[90%] rounded-lg"
-                  alt=""
-                />
+               
                 <img
                   src={`data:image/svg+xml;base64,${currentUserImage}`}
-                  className="absolute bottom-0 w-[20%] rounded-lg "
+                  className=" bottom-0 w-[70%] p-2 rounded-lg "
                   alt=""
                 />
               </div>
-              <h1 className="text-center text-lg font-bold">{currentUserName}</h1>
+              <h1 className="text-center text-xl my-3 font-bold">Alejandro Agra</h1>
               <h3 className="text-center text-xs font-extralight">@{currentUserName}</h3>
               <div className="my-3 flex w-[100%]">
                 <div className="flex w-[33%] flex-col items-center">

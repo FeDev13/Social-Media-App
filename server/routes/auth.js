@@ -16,7 +16,7 @@ const {
   router.get("/allusers/:id", getAllUsers);
   router.post("/setavatar/:id", setAvatar);
   router.get("/logout/:id", logOut);
-  router.get("/", getUsers);
+  router.get("/allusers", getUsers);
   router.get('/users/:id', findByUser);
 
   
