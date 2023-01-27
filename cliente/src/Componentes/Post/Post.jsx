@@ -10,18 +10,6 @@ const Post = ({ post }) => {
   const [user, setUser] = useState({});
   const { user: currentUser } = useContext(AuthContext);
 
-  useEffect(() => {
-    setIsLiked(post.likes.includes(currentUser._id));
-  }, [currentUser._id, post.likes]);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const res = await axios.get(`http://localhost:5050/users/${post.userId}`);
-      setUser(res.data);
-    };
-    fetchUser();
-  }, [post.userId]);
-
   //funcion de likes
   const likeHandler = () => {
     try {
@@ -69,13 +57,7 @@ const Post = ({ post }) => {
           </div>
         </div>
         <p className="px-[2%] py-[1%] text-lg font-light max-lg:text-base">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium a
-          eos beatae corrupti id, temporibus exercitationem, molestias minima
-          sit laborum enim quaerat aut error earum vero reiciendis debitis
-          incidunt quos? Lorem ipsum dolor sit amet consectetur, adipisicing
-          elit. Voluptatem consequuntur tenetur nisi laborum libero voluptate
-          ipsum, nam enim, quam cum rerum, sequi t? Quo nemo nulla repudiandae
-          aspernatur molestias praesentium.
+          {post.desc}
         </p>
         <div className="flex w-full items-center gap-6 border-t-2 p-[2%]  ">
           <div className="flex items-center gap-2">
@@ -86,7 +68,7 @@ const Post = ({ post }) => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="red"
-              className="h-6 w-6"
+              className="h-6 w-6 cursor-pointer"
             >
               <path
                 strokeLinecap="round"
@@ -94,7 +76,7 @@ const Post = ({ post }) => {
                 d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
               />
             </svg>
-            <h4 className="text-xs font-extralight">120</h4>
+            <h4 className="text-xs font-extralight">{like}</h4>
           </div>
           <div className="flex items-center gap-2">
             <svg
