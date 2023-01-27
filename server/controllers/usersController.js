@@ -1,95 +1,11 @@
-const {User} = require("../models/users.models");
+const { User } = require("../models/users.models");
 const bcrypt = require("bcrypt");
 
-module.exports.login = async (req, res, next) => {
-  try {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
-    if (!user)
-      return res.json({ msg: "Incorrect Username or Password", status: false });
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid)
-      return res.json({ msg: "Incorrect Username or Password", status: false });
-    delete user.password;
-    return res.json({ status: true, user });
-  } catch (ex) {
-    next(ex);
-  }
-};
-
-module.exports.register = async (req, res, next) => {
-  try {
-    const { username, email, password } = req.body;
-    const usernameCheck = await User.findOne({ username });
-    if (usernameCheck)
-      return res.json({ msg: "Username already used", status: false });
-    const emailCheck = await User.findOne({ email });
-    if (emailCheck)
-      return res.json({ msg: "Email already used", status: false });
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({
-      email,
-      username,
-      password: hashedPassword,
-    });
-    delete user.password;
-    return res.json({ status: true, user });
-  } catch (ex) {
-    next(ex);
-  }
-};
-
-module.exports.getAllUsers = async (req, res, next) => {
-  try {
-    const users = await User.find({ _id: { $ne: req.params.id } }).select([
-      "email",
-      "username",
-      "avatarImage",
-      "_id",
-    ]);
-    return res.json(users);
-  } catch (ex) {
-    next(ex);
-  }
-};
-
-module.exports.setAvatar = async (req, res, next) => {
-  try {
-    const userId = req.params.id;
-    const avatarImage = req.body.image;
-    const userData = await User.findByIdAndUpdate(
-      userId,
-      {
-        isAvatarImageSet: true,
-        avatarImage,
-      },
-      { new: true }
-    );
-    return res.json({
-      isSet: userData.isAvatarImageSet,
-      image: userData.avatarImage,
-    });
-  } catch (ex) {
-    next(ex);
-  }
-};
-
-module.exports.logOut = (req, res, next) => {
-  try {
-    if (!req.params.id) return res.json({ msg: "User id is required " });
-    onlineUsers.delete(req.params.id);
-    return res.status(200).send();
-  } catch (ex) {
-    next(ex);
-  }
-};
-
-module.exports.getUsers = async (req, res) => {
+const getUsers = async (req, res) => {
   const user = await User.find();
   res.json(user);
 };
-
-module.exports.findByUser = async (req, res) => {
+const findByUser = async (req, res) => {
   const { id } = req.params;
   User.findById(id)
     .then((data) => {
@@ -98,4 +14,37 @@ module.exports.findByUser = async (req, res) => {
     .catch(() => {
       res.json({ message: "Id no encontrado" });
     });
+};
+const UpdateByUser = async (req, res) => {
+  const { id } = req.params;
+  await User.updateOne({ _id: id }, req.body);
+  res.json({ message: "Datos Modificados" });
+};
+const deleteByUser = async (req, res) => {
+  const { id } = req.params;
+  await User.remove({ _id: id });
+  res.json({ message: "Datos Eliminados" });
+};
+
+const createUser = async (req, res) => {
+  const modelData = {
+    fullname: req.body.fullname,
+    username: req.body.username,
+    email: req.body.email,
+    password: bcrypt.hashSync(req.body.password, 10),
+    profilePicture: req.body.profilePicture,
+    followers: req.body.followers,
+    following: req.body.following,
+    bio: req.body.bio,
+  };
+  const user = new User(modelData);
+  user.save();
+  res.json(user);
+};
+module.exports = {
+  getUsers,
+  createUser,
+  findByUser,
+  UpdateByUser,
+  deleteByUser,
 };

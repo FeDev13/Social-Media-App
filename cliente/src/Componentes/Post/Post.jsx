@@ -16,7 +16,7 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`http://localhost:5050/posts/:username=${post.userId}`);
+      const res = await axios.get(`http://localhost:5050/users/${post.userId}`);
       setUser(res.data);
     };
     fetchUser();
@@ -25,7 +25,9 @@ const Post = ({ post }) => {
   //funcion de likes
   const likeHandler = () => {
     try {
-      axios.put("http://localhost:5050/posts/" + post._id + "/like", { userId: currentUser._id }); //ruta del like
+      axios.put("http://localhost:5050/posts/" + post._id + "/like", {
+        userId: currentUser._id,
+      }); //ruta del like
     } catch (err) {}
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
@@ -56,7 +58,7 @@ const Post = ({ post }) => {
               />
             </svg>
             <div className="flex flex-col ">
-              <h2>Username</h2>
+              <h2>{user.username}</h2>
               <div className="flex gap-4">
                 <h4 className="text-xs text-blue-800">Ubicacion</h4>
                 <h4 className="text-xs font-extralight opacity-70">
