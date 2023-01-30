@@ -1,20 +1,67 @@
 import React from "react";
-import { useState,useEffect  } from "react";
+import { useState, useEffect } from "react";
 import { allUsersRoute } from "../../utils/APIRoutes";
 import axios from "axios";
 
 const Aside = () => {
   const [allusers, setAllUsers] = useState([]);
- 
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const [userId, setUserId] = useState("");
+  const [user, setUser] = useState([]);
+  const [followers, setFollowers] = useState([]);
+
+  useEffect(() => {
+    const asyncFn = async () => {
+      const data = await JSON.parse(
+        localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
+      );
+      setUser(data);
+      setUserId(data._id);
+    };
+    asyncFn();
+  }, []);
+
+  const [follow, setFollow] = useState("");
+
+  const handleFollow = async (id) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:5050/users/follow/${userId}`,
+        {
+          follower: id,
+        }
+      );
+      console.log(response.data);
+      setCurrentUser(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // const handleUnfollow = async () => {
+  //     try {
+  //     const response = await axios.post(`http://localhost:5050/unfollow/${_id}`, {
+  //     follower: props.currentUserId,
+  //     });
+  //    setCurrentUser(false);
+  //     } catch (error) {
+  //     console.error(error);
+  //     }
+  //     };
+
 
   useEffect(() => {
     async function productosDB() {
       const data = await axios.get(allUsersRoute);
       setAllUsers(data.data);
+      const followers = await axios.get(`http://localhost:5050/users/${userId}`)
+      setFollowers(data.data);
+      console.log(followers);
     }
-    console.log(allusers)
+    console.log(allusers);
     productosDB();
   }, []);
+  console.log(follow);
   return (
     <>
       <div className="w-[15%] py-[2%] gap-y-10  justify-center  flex max-lg:hidden">
@@ -41,77 +88,84 @@ const Aside = () => {
             </svg>
           </div>
           <div className="w-full">
-            <h4 className=" text-sm  mt-4 mb-2  pl-6 text font-semibold">FOLLOWING</h4>
+            <h4 className=" text-sm  mt-4 mb-2  pl-6 text font-semibold">
+              FOLLOWING
+            </h4>
             {allusers.slice(0, 5).map((Element) => {
-            return (
+              return (
                 <>
-                 <div className="flex justify-between p-2 items-center max-xl:px-0">
-              <div className="flex w-full gap-4 items-center justify-around">
-                
-           <img alt=""   src={`data:image/svg+xml;base64,${Element.avatarImage}`} className="w-12 h-10"/>
-                <h3 className=" font-extralight">{Element.username}</h3>
-            
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="blue"
-                className="w-6 h-6 plus"
-              
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 6v12m6-6H6"
-                />
-              </svg>
-              </div>
-            </div>
+                  <div className="flex justify-between p-2 items-center max-xl:px-0">
+                    <div className="flex w-full gap-4 items-center justify-around">
+                      <img
+                        alt=""
+                        src={`data:image/svg+xml;base64,${Element.avatarImage}`}
+                        className="w-12 h-10"
+                      />
+                      <h3 className=" font-extralight">{Element.username}</h3>
+
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="blue"
+                        className="w-6 h-6 plus"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 6v12m6-6H6"
+                        />
+                      </svg>
+                    </div>
+
+                    <button
+                      id={Element._id}
+                      onClick={() => handleFollow(Element._id)}
+                    >
+                      Seguir
+                    </button>
+                  </div>
                 </>
-
-
-            )})}
-
-
-
-
+              );
+            })}
           </div>
           <div className="w-full">
-            <h4 className=" text-sm  mt-8 mb-2  ml-6 text font-semibold">RECOMMENDATION</h4>
+            <h4 className=" text-sm  mt-8 mb-2  ml-6 text font-semibold">
+              RECOMMENDATION
+            </h4>
             {allusers.slice(5, 10).map((Element) => {
-            return (
+              return (
                 <>
-                 <div className="flex justify-between p-2 items-center max-xl:px-0">
-              <div className="flex w-full gap-4 items-center justify-around">
-                
-           <img alt=""   src={`data:image/svg+xml;base64,${Element.avatarImage}`} className="w-12 h-10"/>
-                <h3 className=" font-extralight">{Element.username}</h3>
-            
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="blue"
-                className="w-6 h-6 plus"
-              
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 6v12m6-6H6"
-                />
-              </svg>
-              </div>
-            </div>
+                  <div className="flex justify-between p-2 items-center max-xl:px-0">
+                    <div className="flex w-full gap-4 items-center justify-around">
+                      <img
+                        alt=""
+                        src={`data:image/svg+xml;base64,${Element.avatarImage}`}
+                        className="w-12 h-10"
+                      />
+                      <h3 className=" font-extralight">{Element.username}</h3>
+
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="blue"
+                        className="w-6 h-6 plus"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 6v12m6-6H6"
+                        />
+                      </svg>
+                    </div>
+                  </div>
                 </>
-
-
-            )})}
+              );
+            })}
           </div>
-          
-       
         </div>
       </div>
     </>

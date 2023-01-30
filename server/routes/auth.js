@@ -6,7 +6,10 @@ const {
     logOut,
     getUsers,
     createUser,
-    findByUser
+    findByUser,
+    FollowUser,
+    UnfollowUser,
+    findByFollowers,
   } = require("../controllers/usersController");
   
   const router = require("express").Router();
@@ -17,7 +20,10 @@ const {
   router.post("/setavatar/:id", setAvatar);
   router.get("/logout/:id", logOut);
   router.get("/allusers", getUsers);
-  router.get('/users/:id', findByUser);
+  router.get("/:id", findByUser);
+  router.get("/follow/:id", findByFollowers);
+  router.post("/follow/:id", FollowUser);
+  router.post("/unfollow/:id", UnfollowUser);
 
   
   module.exports = router;

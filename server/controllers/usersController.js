@@ -1,4 +1,4 @@
-const {User} = require("../models/users.models");
+const User = require("../models/users.models");
 const bcrypt = require("bcrypt");
 
 module.exports.login = async (req, res, next) => {
@@ -55,10 +55,10 @@ module.exports.getAllUsers = async (req, res, next) => {
 
 module.exports.setAvatar = async (req, res, next) => {
   try {
-    const userId = req.params.id;
+    const _id = req.params.id;
     const avatarImage = req.body.image;
     const userData = await User.findByIdAndUpdate(
-      userId,
+      _id,
       {
         isAvatarImageSet: true,
         avatarImage,
@@ -99,3 +99,64 @@ module.exports.findByUser = async (req, res) => {
       res.json({ message: "Id no encontrado" });
     });
 };
+
+module.exports.findByFollowers = async (req, res) => {
+  const { id } = req.params;
+  User.findById(id)
+    .then((data) => {
+      res.json(data.followers);
+    })
+    .catch(() => {
+      res.json({ message: "Id no encontrado" });
+    });
+};
+
+
+module.exports.likePost = async(req, res) => {
+  try{
+
+      const user = await User.findById(req.params.id);
+      if(!user.likes.includes(req.body.userId)){
+          await user.updateOne({$push: {likes: req.body.userId}});
+          res.status(200).json("The user has been liked");
+      }else {
+          await user.updateOne({$pull: {likes: req.body.userId}});
+          res.status(200).json("The user has been disliked")
+      }
+      
+  }catch(err){res.status(500).json(err); console.log(err)}
+}
+
+// Follow a user
+module.exports.FollowUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    user.followers.push(req.body.follower);
+    await user.save();
+
+    const follower = await User.findById(req.body.follower);
+    follower.following.push(req.params.id);
+    await follower.save();
+
+    res.send({ message: "Followed successfully" });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+}
+
+// Unfollow a user
+module.exports.UnfollowUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    user.followers.remove(req.body.follower);
+    await user.save();
+
+    const follower = await User.findById(req.body.follower);
+    follower.following.remove(req.params.id);
+    await follower.save();
+
+    res.send({ message: "Unfollowed successfully" });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+}
