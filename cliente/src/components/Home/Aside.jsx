@@ -49,12 +49,13 @@ const Aside = () => {
   //     }
   //     };
 
-
   useEffect(() => {
     async function productosDB() {
       const data = await axios.get(allUsersRoute);
       setAllUsers(data.data);
-      const followers = await axios.get(`http://localhost:5050/users/${userId}`)
+      const followers = await axios.get(
+        `http://localhost:5050/users/${userId}`
+      );
       setFollowers(data.data);
       console.log(followers);
     }
@@ -87,7 +88,7 @@ const Aside = () => {
               />
             </svg>
           </div>
-          <div className="w-full">
+          <div className="w-full flex flex-col gap-y-3 ">
             <h4 className=" text-sm  mt-4 mb-2  pl-6 text font-semibold">
               FOLLOWING
             </h4>
@@ -95,31 +96,25 @@ const Aside = () => {
               return (
                 <>
                   <div className="flex justify-between p-2 items-center max-xl:px-0">
-                    <div className="flex w-full gap-4 items-center justify-around">
-                      <img
-                        alt=""
-                        src={`data:image/svg+xml;base64,${Element.avatarImage}`}
-                        className="w-12 h-10"
-                      />
-                      <h3 className=" font-extralight">{Element.username}</h3>
-
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="blue"
-                        className="w-6 h-6 plus"
+                    <div className="flex w-full items-center ">
+                      <a
+                        className="flex items-center justify-evenly w-full "
+                        href={"/Profile/" + Element._id}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M12 6v12m6-6H6"
+                        <img
+                          alt=""
+                          src={`data:image/svg+xml;base64,${Element.avatarImage}`}
+                          className="w-12 h-10"
                         />
-                      </svg>
+                        <div className="w-full text-center">
+                          <h3 className=" font-extralight">
+                            {Element.username}
+                          </h3>
+                        </div>
+                      </a>
                     </div>
-
                     <button
+                      className="color-item rounded-lg p-2 text-md font-light"
                       id={Element._id}
                       onClick={() => handleFollow(Element._id)}
                     >
@@ -137,7 +132,7 @@ const Aside = () => {
             {allusers.slice(5, 10).map((Element) => {
               return (
                 <>
-                  <div className="flex justify-between p-2 items-center max-xl:px-0">
+                  <div className="flex justify-between p-2 items-center max-xl:px-0 ">
                     <div className="flex w-full gap-4 items-center justify-around">
                       <img
                         alt=""
