@@ -16,6 +16,17 @@ const postSchema = mongoose.Schema({
     type: Array,
     default: [],
   },
+  comments: {
+    type: Array,
+    userId: {
+      type: String,
+      required: true,
+    },
+    comment: {
+      type: String,
+      required: true,
+    },
+  },
 });
 
 var Post = mongoose.model("Post", postSchema);
