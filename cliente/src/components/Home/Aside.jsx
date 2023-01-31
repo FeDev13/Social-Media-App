@@ -4,11 +4,13 @@ import { allUsersRoute } from "../../utils/APIRoutes";
 import axios from "axios";
 
 const Aside = () => {
-  const [allusers, setAllUsers] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [userId, setUserId] = useState("");
   const [user, setUser] = useState([]);
-  const [followers, setFollowers] = useState([]);
+  const [notFollowing, setNotFollowing] = useState([]);
+  const [following, setFollowing] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const asyncFn = async () => {
@@ -21,8 +23,6 @@ const Aside = () => {
     asyncFn();
   }, []);
 
-  const [follow, setFollow] = useState("");
-
   const handleFollow = async (id) => {
     try {
       const response = await axios.post(
@@ -33,6 +33,7 @@ const Aside = () => {
       );
       console.log(response.data);
       setCurrentUser(true);
+      getAllUsers();
     } catch (error) {
       console.error(error);
     }
@@ -49,20 +50,56 @@ const Aside = () => {
   //     }
   //     };
 
+  // useEffect(() => {
+  //   async function productosDB() {
+  //     const data = await axios.get(allUsersRoute);
+  //     setAllUsers(data.data);
+  //     const followers = await axios.get(
+  //       `http://localhost:5050/users/follow/${userId}`
+  //     );
+  //     setFollowers(data.data);
+  //     console.log(followers);
+  //   }
+  //   console.log(allUsers);
+  //   productosDB();
+  // }, []);
+  // console.log(followers);
+
+  // useEffect(() => {
+  //   setNotFollowing(allUsers.filter(user => !followers.includes(user._id)));
+  // }, [allUsers, followers]);
+
+  // console.log(notFollowing);
+
   useEffect(() => {
-    async function productosDB() {
-      const data = await axios.get(allUsersRoute);
-      setAllUsers(data.data);
-      const followers = await axios.get(
-        `http://localhost:5050/users/${userId}`
-      );
-      setFollowers(data.data);
-      console.log(followers);
-    }
-    console.log(allusers);
-    productosDB();
+    getAllUsers();
   }, []);
-  console.log(follow);
+
+  const getAllUsers = async () => {
+    const allUsersResponse = await axios.get(allUsersRoute);
+    setAllUsers(allUsersResponse.data);
+  };
+
+  useEffect(() => {
+    getFollowerUsers();
+  }, [allUsers]);
+  const getFollowerUsers = async () => {
+    const followingResponse = await axios.get(
+      `http://localhost:5050/users/follow/${userId}`
+    );
+    setFollowing(followingResponse.data);
+  };
+
+  useEffect(() => {
+    setNotFollowing(
+      allUsers.filter((user) => !Object.values(following).includes(user._id))
+    );
+    console.log(notFollowing);
+    setLoading(true);
+  }, [following]);
+
+  console.log(allUsers);
+  console.log(following);
   return (
     <>
       <div className="w-[15%] py-[2%] gap-y-10  justify-center  flex max-lg:hidden">
@@ -89,47 +126,51 @@ const Aside = () => {
             </svg>
           </div>
           <div className="w-full flex flex-col gap-y-3 ">
+            {loading && notFollowing.length > 0 && (
+              <>
             <h4 className=" text-sm  mt-4 mb-2  pl-6 text font-semibold">
               FOLLOWING
             </h4>
-            {allusers.slice(0, 5).map((Element) => {
-              return (
-                <>
-                  <div className="flex justify-between p-2 items-center max-xl:px-0">
-                    <div className="flex w-full items-center ">
-                      <a
-                        className="flex items-center justify-evenly w-full "
-                        href={"/Profile/" + Element._id}
-                      >
-                        <img
-                          alt=""
-                          src={`data:image/svg+xml;base64,${Element.avatarImage}`}
-                          className="w-12 h-10"
-                        />
-                        <div className="w-full text-center">
-                          <h3 className=" font-extralight">
-                            {Element.username}
-                          </h3>
+                {notFollowing.map((Element) => {
+                  return (
+                    <>
+                      <div className="flex justify-between p-2 items-center max-xl:px-0">
+                        <div className="flex w-full items-center ">
+                          <a
+                            className="flex items-center justify-evenly w-full "
+                            href={"/Profile/" + Element._id}
+                          >
+                            <img
+                              alt=""
+                              src={`data:image/svg+xml;base64,${Element.avatarImage}`}
+                              className="w-12 h-10"
+                            />
+                            <div className="w-full text-center">
+                              <h3 className=" font-extralight">
+                                {Element.username}
+                              </h3>
+                            </div>
+                          </a>
                         </div>
-                      </a>
-                    </div>
-                    <button
-                      className="color-item rounded-lg p-2 text-md font-light"
-                      id={Element._id}
-                      onClick={() => handleFollow(Element._id)}
-                    >
-                      Seguir
-                    </button>
-                  </div>
-                </>
-              );
-            })}
+                        <button
+                          className="color-item rounded-lg p-2 text-md font-light"
+                          id={Element._id}
+                          onClick={() => handleFollow(Element._id)}
+                        >
+                          Seguir
+                        </button>
+                      </div>
+                    </>
+                  );
+                })}
+              </>
+            )}
           </div>
           <div className="w-full">
             <h4 className=" text-sm  mt-8 mb-2  ml-6 text font-semibold">
               RECOMMENDATION
             </h4>
-            {allusers.slice(5, 10).map((Element) => {
+            {allUsers.slice(5, 10).map((Element) => {
               return (
                 <>
                   <div className="flex justify-between p-2 items-center max-xl:px-0 ">
