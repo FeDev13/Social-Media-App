@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const authRoutes = require("./routes/auth");
 const messageRoutes = require("./routes/messages");
 const routerPosts = require("./routes/posts.route");
+const multer = require ("multer")
+const path = require ("path")
 
 const app = express();
 const socket = require("socket.io");
@@ -11,6 +13,7 @@ require("dotenv").config();
 
 app.use(cors());
 app.use(express.json());
+app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 mongoose
   .connect(process.env.MONGO_URL, {
@@ -24,6 +27,23 @@ mongoose
     console.log(err.message);
   });
 
+  const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, "public/images");
+    },
+    filename: (req, file, cb) => {
+      cb(null, req.body.name);
+    },
+  });
+  
+  const upload = multer({ storage: storage });
+  app.post("/upload", upload.single("file"), (req, res) => {
+    try {
+      return res.status(200).json("archivo subido correctamente");
+    } catch (error) {
+      console.error(error);
+    }
+  });
 app.use("/users", authRoutes);
 app.use("/messages", messageRoutes);
 app.use("/", routerPosts);
