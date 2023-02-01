@@ -6,3 +6,4 @@ export const allUsersRoute = `${host}/users/allusers`;
 export const sendMessageRoute = `${host}/messages/addmsg`;
 export const recieveMessageRoute = `${host}/messages/getmsg`;
 export const setAvatarRoute = `${host}/users/setavatar`;
+export const editRoute = `${host}/users`;

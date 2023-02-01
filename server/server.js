@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const authRoutes = require("./routes/auth");
 const messageRoutes = require("./routes/messages");
 const postRoutes = require("./routes/posts.route");
-
+const multer = require("./config/multer");
 const app = express();
 const socket = require("socket.io");
 require("dotenv").config();
@@ -24,19 +24,18 @@ mongoose
     console.log(err.message);
   });
 
+app.use(express.json());
+app.use(express.static(__dirname));
 app.use("/users", authRoutes);
 app.use("/messages", messageRoutes);
 app.use(postRoutes);
-
-
-
 
 const server = app.listen(process.env.PORT, () =>
   console.log(`Server started on ${process.env.PORT}`)
 );
 const io = socket(server, {
   cors: {
-    origin: "http://127.0.0.1:5173",
+    origin: "http://localhost:5173",
     credentials: true,
   },
 });
@@ -55,9 +54,6 @@ io.on("connection", (socket) => {
     }
   });
 });
-
-
-
 
 // const express = require("express");
 // const mongose = require("mongoose");

@@ -16,7 +16,7 @@ export default function Logout() {
     }
   };
   return (
-    <button className="flex justify-center m-auto items-center p-[0.5rem] w-[20%] rounded-lg  container  border-none cursor-pointer " onClick={handleClick}>
+    <button className="rounded-lg  container p-2 border-none cursor-pointer " onClick={handleClick}>
      Salir
     </button>
   );

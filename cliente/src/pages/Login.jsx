@@ -5,7 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import Logo from "../assets/logo.svg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { loginRoute } from "../utils/APIRoutes";
+import { editRoute, loginRoute } from "../utils/APIRoutes";
 import Navbar from "../components/Navbar/Navbar";
 import Logout from "../components/Logout";
 
@@ -13,8 +13,8 @@ export default function Login() {
   const [activeBtn, setActiveBtn] = useState("Mensaje");
   const bgImage =
   "https://images.unsplash.com/photo-1673447043169-a309c86f822c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDczfGlVSXNuVnRqQjBZfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
-const userimage =
-  "https://images.unsplash.com/photo-1670582725604-ee64ac849e4f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDUwfGhtZW52UWhVbXhNfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
+const userImage =
+  "http://localhost:5050/upload/product-avatarImage-1675271944477.jpeg";
 
 const activeBtnStyles =
   "bg-blue-600 text-white font-bold p-2 rounded-lg shadow-lg w-40 outline-none";
@@ -26,12 +26,14 @@ const notActiveBtnStyles =
   const [user, setUser] = useState(null);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentUserName, setCurrentUserName] = useState(undefined);
+  const [edit,setEdit] = useState(false);
   useEffect( () => {
     const asyncFn = async () => { const data = await JSON.parse(
       localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
     );
     setCurrentUserName(data.username);
     setCurrentUserImage(data.avatarImage); };
+  
     asyncFn();
   }, []);
 
@@ -93,6 +95,15 @@ const notActiveBtnStyles =
     }
   };
   console.log(user)
+  const handleClick = async () => {
+    const id = await JSON.parse(
+      localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
+    )._id;
+    const data = await axios.put(`${editRoute}/${id}`);
+    if (data.status === 200) {
+      localStorage.clear();
+    }
+  };
   const loginForm = () => (
   <div>
   <section className="h-screen w-full flex flex-col justify-center gap-[1rem] items-center bg-[#131324]">
@@ -172,7 +183,10 @@ const notActiveBtnStyles =
           Mensajes
         </button>
         </Link > */}
-        <Link to="/" className=""><Logout/></Link>
+        <div className="flex justify-center gap-4">
+        <Link to="/" className=" w-[20%]"><Logout /></Link>
+        <button className="border w-[20%] container cursor-pointer rounded-lg" onClick={handleClick}>Editar Perfil</button>
+        </div>
         {/* <a href="/Login"> */}
         {/* <button  onClick={hadndleLogout} className="dark:text-white bg-blue-600 text-white font-bold p-2 rounded-lg shadow-lg w-40 outline-none">salir</button></a> */}
       </div>

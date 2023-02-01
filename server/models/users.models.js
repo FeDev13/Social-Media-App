@@ -15,6 +15,14 @@ const UserSchema = new Schema({
     unique: true,
     max: 50,
   },
+  descripcion:{
+    type: String,
+    default: "",
+  },
+  background: {
+    type: String,
+    default: "http://localhost:5050/upload/product-avatarImage-1675271944477.jpeg",
+  },
   password: {
     type: String,
     required: true,
@@ -42,7 +50,7 @@ const UserSchema = new Schema({
   },
   avatarImage: {
     type: String,
-    default: "",
+    default: "https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png",
   },
 });
 

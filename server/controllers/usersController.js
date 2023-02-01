@@ -17,9 +17,24 @@ module.exports.login = async (req, res, next) => {
   }
 };
 
+// module.exports.register = async (req, res) => {
+//   // const url = req.protocol + "://" + req.get("host");
+//   // const urlImage = url + "/upload/" + req.file.filename;
+//   const modelData = {
+//     username: req.body.username,
+//     email: req.body.email,
+//     password: bcrypt.hashSync(req.body.password, 10)
+//   };
+
+//   const user = new User(modelData);
+//   user.save();
+//   res.json(user);
+// };
+
+
 module.exports.register = async (req, res, next) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password, avatarImage } = req.body;
     const usernameCheck = await User.findOne({ username });
     if (usernameCheck)
       return res.json({ msg: "Username already used", status: false });
@@ -111,21 +126,21 @@ module.exports.findByFollowers = async (req, res) => {
     });
 };
 
-
-module.exports.likePost = async(req, res) => {
-  try{
-
-      const user = await User.findById(req.params.id);
-      if(!user.likes.includes(req.body.userId)){
-          await user.updateOne({$push: {likes: req.body.userId}});
-          res.status(200).json("The user has been liked");
-      }else {
-          await user.updateOne({$pull: {likes: req.body.userId}});
-          res.status(200).json("The user has been disliked")
-      }
-      
-  }catch(err){res.status(500).json(err); console.log(err)}
-}
+module.exports.likePost = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user.likes.includes(req.body.userId)) {
+      await user.updateOne({ $push: { likes: req.body.userId } });
+      res.status(200).json("The user has been liked");
+    } else {
+      await user.updateOne({ $pull: { likes: req.body.userId } });
+      res.status(200).json("The user has been disliked");
+    }
+  } catch (err) {
+    res.status(500).json(err);
+    console.log(err);
+  }
+};
 
 // Follow a user
 module.exports.FollowUser = async (req, res) => {
@@ -142,7 +157,7 @@ module.exports.FollowUser = async (req, res) => {
   } catch (error) {
     res.status(500).send({ error: error.message });
   }
-}
+};
 
 // Unfollow a user
 module.exports.UnfollowUser = async (req, res) => {
@@ -159,4 +174,16 @@ module.exports.UnfollowUser = async (req, res) => {
   } catch (error) {
     res.status(500).send({ error: error.message });
   }
-}
+};
+
+module.exports.updateUser = async (req, res) => {
+  const { id } = req.params;
+  let modelData = {
+    username: req.body.username,
+    descripcion: req.body.descripcion,
+    background: req.body.background,
+    avatarImage: req.body.avatarImage,
+  };
+  await User.updateOne({ _id: id }, modelData);
+  res.json({ message: "Usuario Modificado" });
+};
