@@ -1,19 +1,24 @@
 import React from "react";
 import "tw-elements";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 const AsideRight = () => {
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentUserName, setCurrentUserName] = useState(undefined);
-  const [currentMail, setCurrentMail] = useState(undefined);
-  useEffect( () => {
-    const asyncFn = async () => { const data = await JSON.parse(
-      localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
-    );
-    setCurrentUserName(data.username);
-    setCurrentUserImage(data.avatarImage);
-    setCurrentMail(data.email);
-  };
+  const [id, setId] = useState("");
+ 
+  useEffect(() => {
+    const asyncFn = async () => {
+      const data = await JSON.parse(
+        localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
+      )._id;
+      setId(data);
+      const dato = await axios.get(`http://localhost:5050/users/${data}`);
+      setCurrentUserName(dato.data.username);
+      setCurrentUserImage(dato.data.avatarImage);
+      console.log(data);
+    };
     asyncFn();
   }, []);
   return (
@@ -30,7 +35,7 @@ const AsideRight = () => {
                   alt=""
                 />
               </div>
-              <h1 className="text-center text-xl my-3 font-bold">Alejandro Agra</h1>
+              <h1 className="text-center text-xl my-3 font-bold">{currentUserName}</h1>
               <h3 className="text-center text-xs font-extralight">@{currentUserName}</h3>
               <div className="my-3 flex w-[100%]">
                 <div className="flex w-[33%] flex-col items-center">

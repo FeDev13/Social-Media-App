@@ -21,7 +21,7 @@ const UserSchema = new Schema({
   },
   background: {
     type: String,
-    default: "http://localhost:5050/upload/product-avatarImage-1675271944477.jpeg",
+    default: "",
   },
   password: {
     type: String,

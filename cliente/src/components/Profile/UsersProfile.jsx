@@ -13,12 +13,13 @@ function ProfileUsers() {
   const [profile, setProfile] = useState(undefined);
   const [followers, setFollow] = useState(undefined);
   const [following, setFollowing] = useState(undefined);
-
+  const [background, setBackground] = useState(undefined);
   useEffect(() => {
     async function productosDB() {
       const data = await axios.get(url);
       setProfile(data.data);
       setCurrentUserName(data.data.username);
+      setBackground(data.data.background);
       setCurrentUserImage(data.data.avatarImage);
       setFollow(data.data.followers.length);
       setFollowing(data.data.following.length);
@@ -36,7 +37,7 @@ function ProfileUsers() {
             {/* imagen de fondo */}
             <div className="flex flex-col justify-center items-center">
               <img
-                src={bgImage} //hacerlo dinamico con la db
+                src={background} //hacerlo dinamico con la db
                 alt=""
                 className="w-full h-60 2xl:h-510 shadow-lg object-cover rounded-lg"
               />

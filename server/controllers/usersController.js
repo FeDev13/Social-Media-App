@@ -31,7 +31,6 @@ module.exports.login = async (req, res, next) => {
 //   res.json(user);
 // };
 
-
 module.exports.register = async (req, res, next) => {
   try {
     const { username, email, password, avatarImage } = req.body;
@@ -178,11 +177,11 @@ module.exports.UnfollowUser = async (req, res) => {
 
 module.exports.updateUser = async (req, res) => {
   const { id } = req.params;
+  const url = req.protocol + "://" + req.get("host");
+  const urlImage = url + "/upload/" + req.file.filename;
   let modelData = {
     username: req.body.username,
-    descripcion: req.body.descripcion,
-    background: req.body.background,
-    avatarImage: req.body.avatarImage,
+    background: urlImage,
   };
   await User.updateOne({ _id: id }, modelData);
   res.json({ message: "Usuario Modificado" });
