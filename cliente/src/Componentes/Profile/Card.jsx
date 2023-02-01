@@ -11,12 +11,11 @@ const Card = () => {
   const submitPost = async (e) => {
     e.preventDefault();
     const newPost = {
-      username: user._id,
+      userId: user._id,
       desc: desc.current.value,
     };
 
-
-  //imagen
+    //imagen
     if (file) {
       const data = new FormData();
       const fileName = Date.now() + file.name;
@@ -48,7 +47,8 @@ const Card = () => {
       />
 
       <div className=" flex">
-        <button onClick={submitPost}
+        <button
+          onClick={submitPost}
           type="button"
           id="btn"
           className="mt-8 ml-10 rounded bg-black px-6 py-2.5 text-xs
