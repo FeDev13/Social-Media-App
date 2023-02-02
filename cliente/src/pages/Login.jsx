@@ -10,32 +10,36 @@ import Navbar from "../components/Navbar/Navbar";
 import Logout from "../components/Logout";
 
 export default function Login() {
-  const [activeBtn, setActiveBtn] = useState("Mensaje");
-  const bgImage =
-    "https://images.unsplash.com/photo-1673447043169-a309c86f822c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDczfGlVSXNuVnRqQjBZfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
-  const userImage =
-    "http://localhost:5050/upload/product-avatarImage-1675271944477.jpeg";
-
-  const activeBtnStyles =
-    "bg-blue-600 text-white font-bold p-2 rounded-lg shadow-lg w-40 outline-none";
-
-  const notActiveBtnStyles =
-    "bg-primary text-black mr-4 font-bold p-2 rounded-lg w-40 outline-none";
   const navigate = useNavigate();
   const [values, setValues] = useState({ username: "", password: "" });
   const [user, setUser] = useState(null);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentUserName, setCurrentUserName] = useState(undefined);
-  const [edit, setEdit] = useState(false);
   const [username, setUsername] = useState("");
   const [id, setId] = useState("");
   const [background, setBackground] = useState("");
+
+  useEffect(() => {
+    const asyncFn = async () => {
+      if (localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)) {
+        navigate("/Profile");
+      } else {
+        setCurrentUser(
+          await JSON.parse(
+            localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
+          )
+        );
+      }
+    };
+    asyncFn();
+  }, []);
+
   useEffect(() => {
     const asyncFn = async () => {
       const data = await JSON.parse(
         localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
       )._id;
-     setId(data)
+      setId(data);
       const dato = await axios.get(`http://localhost:5050/users/${data}`);
       setCurrentUserName(dato.data.username);
       setBackground(dato.data.background);
@@ -179,96 +183,10 @@ export default function Login() {
     </div>
   );
 
-  const logoutForm = () => (
-    <section>
-      <Navbar />
-      <form onSubmit={handleClick} encType="multipart/form-data">
-        <div className="relative pb-2 h-full mt-20 justify-center items-center">
-          <div className="flex flex-col pb-5 dark:text-white">
-            <div className="relative flex flex-col mb-7">
-              {/* imagen de fondo */}
-              <div className="flex flex-col justify-center items-center">
-                <img
-                   src={background}
-                  alt=""
-                  className="w-full h-60 2xl:h-510 shadow-lg object-cover rounded-lg"
-                />
-                <img
-                  src={`data:image/svg+xml;base64,${currentUserImage}`}
-                  className="rounded-full w-40 h-40 -mt-10 shadow-2xl object-cover"
-                  alt=""
-                />
-                <h1 className="font-bold text-3xl text-center mt-3 mb-10">
-                  {currentUserName}
-                </h1>{" "}
-                <h5 className=" text-center mb-8 mt-0">
-                  {" "}
-                  Mar del Plata, Argentina
-                </h5>
-                <div className=" flex flex-row mt-0 mb-10">
-                  @{currentUserName}
-                  <li className=" mx-8">Trabajo actual</li>
-                  <li>Algo mas</li>
-                </div>
-                {/*hacerlo dinamico*/}
-              </div>
-
-              {/* botones */}
-              <div className="text-center mb-7">
-                {/* <Link to='/chat' className="py-3 px-6 container rounded-lg ">
-        <button
-          type="button"
-          onClick={(e) => {
-            setText(e.target.textContent);
-            setActiveBtn("share");
-          }}
-       
-        >
-          Mensajes
-        </button>
-        </Link > */}
-                <div className="flex justify-center gap-4">
-                  <Link to="/" className=" w-[20%]">
-                    <Logout />
-                  </Link>
-                  <button
-                    className="border w-[20%] container cursor-pointer rounded-lg"
-                    type="submit"
-                  >
-                    Editar Perfil
-                  </button>
-                  <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-
-                  <label
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    for="file_input"
-                  >
-                    Upload file
-                  </label>
-                  <input
-                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                    id="file_input"
-                    type="file"
-                    onChange={(e) => setBackground(e.target.files)}
-                  />
-                </div>
-                {/* <a href="/Login"> */}
-                {/* <button  onClick={hadndleLogout} className="dark:text-white bg-blue-600 text-white font-bold p-2 rounded-lg shadow-lg w-40 outline-none">salir</button></a> */}
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
-    </section>
-  );
 
   return (
     <>
-      <div>{user === null ? loginForm() : logoutForm()}</div>
+      <div>{ loginForm() }</div>
     </>
   );
 }

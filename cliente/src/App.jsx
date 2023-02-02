@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import { Search } from './components/Navbar/Search';
 import { ThemeProvider } from './components/Navbar/ThemeContext';
 import ProfileUsers  from "./components/Profile/UsersProfile";
+import Profile from "./components/Profile/MyProfile";
 export default function App() {
   
   return (
@@ -25,8 +26,9 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/setAvatar" element={<SetAvatar />} />
         <Route path="/Search/:buscar" element={<Search />} />
-        <Route path="/chat" element={[<Navbar/>, <Chat />]} />
+        <Route path="/Chat" element={[<Navbar/>, <Chat />]} />
         <Route path="/Profile/:id" element={[<ProfileUsers />]} />
+        <Route path="/Profile" element={[<Profile/>]} />
 
       </Routes>
     </BrowserRouter>

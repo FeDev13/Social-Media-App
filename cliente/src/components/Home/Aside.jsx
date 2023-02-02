@@ -123,14 +123,14 @@ const Aside = () => {
               />
             </svg>
           </div>
-          <div className="w-full flex flex-col gap-y-3 ">
+          <div className="w-full flex flex-col gap-y-1">
             {loading && notFollowing.length > 0 && (
               <>
             <h4 className=" text-sm  mt-4 mb-2  pl-6 text font-semibold">
              
               RECOMMENDATION
             </h4>
-                {notFollowing.map((Element) => {
+                {notFollowing.slice(0, 5).map((Element) => {
                   return (
                     <>
                       <div className="flex justify-between p-2 items-center max-xl:px-0">
