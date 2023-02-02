@@ -31,7 +31,7 @@ const Aside = () => {
           follower: id,
         }
       );
-      console.log(response.data);
+
       setCurrentUser(true);
       getAllUsers();
     } catch (error) {
@@ -94,12 +94,10 @@ const Aside = () => {
     setNotFollowing(
       allUsers.filter((user) => !Object.values(following).includes(user._id))
     );
-    console.log(notFollowing);
     setLoading(true);
   }, [following]);
 
-  console.log(allUsers);
-  console.log(following);
+
   return (
     <>
       <div className="w-[15%] py-[2%] gap-y-10  justify-center  flex max-lg:hidden">
@@ -129,7 +127,8 @@ const Aside = () => {
             {loading && notFollowing.length > 0 && (
               <>
             <h4 className=" text-sm  mt-4 mb-2  pl-6 text font-semibold">
-              FOLLOWING
+             
+              RECOMMENDATION
             </h4>
                 {notFollowing.map((Element) => {
                   return (
@@ -168,7 +167,7 @@ const Aside = () => {
           </div>
           <div className="w-full">
             <h4 className=" text-sm  mt-8 mb-2  ml-6 text font-semibold">
-              RECOMMENDATION
+            FOLLOWING
             </h4>
             {allUsers.slice(5, 10).map((Element) => {
               return (

@@ -6,16 +6,43 @@ import NavSearch from "./NavSearch";
 import "tw-elements";
 import ColorItem from "../Home/color-item";
 import Toggle from "./Toggle";
-
+import axios from "axios";
 const Navbar = () => {
   let btn = document.getElementById("btn");
   let modal = document.getElementById("modal");
   let nav = document.getElementById("nav");
   let plus = document.getElementById("plus");
   const colors = ["#ff6961", "#2ABA7D", "#84b6f4", "#fdcae1"];
+  const [followers, setFollowers] = useState([]);
+  const [id, setId] = useState("");
 
+ 
+  useEffect(() => {
+    const asyncFn = async () => {
+      const data = await JSON.parse(
+        localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
+      )._id;
+      setId(data);
+      const dato = await axios.get(`http://localhost:5050/users/${data}`);
+      setFollowers(dato.data.following)
+
+      axios.get('http://localhost:5050/users/allusers/')
+      .then(response => {
+        response.data.forEach(item => {
+          followers[item.id] = item;
+          setFollowers(followers)
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
   
+     
+    };
+    asyncFn();
+  }, []);
 
+ 
   const setColor = (event) => {
     const currentColor = event.target.style.getPropertyValue("--bg-color");
 
@@ -239,7 +266,17 @@ const Navbar = () => {
             />
           </svg>
         </Link>
-        <svg
+       <div class="flex justify-center">
+          <div>
+            <div class="dropdown relative">
+              <button
+                
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -253,6 +290,67 @@ const Navbar = () => {
             d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
           />
         </svg>
+               
+              </button>
+              <ul
+                class="
+          dropdown-menu
+          min-w-max
+          absolute
+          hidden
+          bg-white
+          text-base
+          z-50
+          float-left
+          py-2
+          list-none
+          text-left
+          rounded-lg
+          shadow-lg
+          mt-1
+          m-0
+          bg-clip-padding
+          border-none
+        "
+                aria-labelledby="dropdownMenuButton1"
+              >
+             
+                
+              
+               
+     {followers.map((Element) => {
+                return (
+                    
+                    <>
+                     <li>
+                  <a href={"/Profile/" + Element }
+                    className="
+              dropdown-item
+              text-sm
+              py-2
+              px-4
+              font-normal
+              block
+              w-full
+              whitespace-nowrap
+              bg-transparent
+              text-gray-700
+              hover:bg-gray-100
+            "
+                    
+                  >
+                    <h1>{Element} ha empezado a seguirte</h1>
+                    </a>
+                </li>
+                    </>
+                    
+
+                  )})}
+                
+              </ul>
+            </div>
+          </div>
+        </div>
         <Link to="/login">
           <svg
             xmlns="http://www.w3.org/2000/svg"

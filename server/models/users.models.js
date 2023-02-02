@@ -21,7 +21,7 @@ const UserSchema = new Schema({
   },
   background: {
     type: String,
-    default: "",
+    default:"https://png.pngtree.com/thumb_back/fh260/background/20200821/pngtree-black-solid-color-background-image_396552.jpg",
   },
   password: {
     type: String,

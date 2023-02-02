@@ -6,6 +6,8 @@ import axios from "axios";
 const AsideRight = () => {
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentUserName, setCurrentUserName] = useState(undefined);
+  const [followers, setFollowers] = useState([]);
+  const [following, setFollowing] = useState([]);
   const [id, setId] = useState("");
  
   useEffect(() => {
@@ -17,10 +19,13 @@ const AsideRight = () => {
       const dato = await axios.get(`http://localhost:5050/users/${data}`);
       setCurrentUserName(dato.data.username);
       setCurrentUserImage(dato.data.avatarImage);
-      console.log(data);
+      setFollowers(dato.data.following)
+      setFollowing(dato.data.followers)
+     
     };
     asyncFn();
   }, []);
+
   return (
     <>
       <div className="flex  w-[15%] flex-col gap-y-5 pt-[2%] max-lg:w-[25%] max-sm:hidden">
@@ -43,13 +48,13 @@ const AsideRight = () => {
                   <h3 className="text-xs font-extralight opacity-60">Post</h3>
                 </div>
                 <div className="flex w-[33%] flex-col items-center">
-                  <h1 className="text-lg font-bold">10</h1>
+                  <h1 className="text-lg font-bold">{followers.length}</h1>
                   <h3 className="text-xs font-extralight opacity-60">
                     Followers
                   </h3>
                 </div>
                 <div className="flex w-[33%] flex-col items-center">
-                  <h1 className="text-lg font-bold">5</h1>
+                  <h1 className="text-lg font-bold">{following.length}</h1>
                   <h3 className="text-xs font-extralight opacity-60">
                     Following
                   </h3>

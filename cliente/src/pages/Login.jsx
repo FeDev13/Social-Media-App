@@ -35,7 +35,7 @@ export default function Login() {
       const data = await JSON.parse(
         localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
       )._id;
-      setId(data);
+     setId(data)
       const dato = await axios.get(`http://localhost:5050/users/${data}`);
       setCurrentUserName(dato.data.username);
       setBackground(dato.data.background);
@@ -189,7 +189,7 @@ export default function Login() {
               {/* imagen de fondo */}
               <div className="flex flex-col justify-center items-center">
                 <img
-                   src={background}//hacerlo dinamico con la db
+                   src={background}
                   alt=""
                   className="w-full h-60 2xl:h-510 shadow-lg object-cover rounded-lg"
                 />
