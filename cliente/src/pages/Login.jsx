@@ -100,7 +100,7 @@ export default function Login() {
           console.log(user)
         );
 
-        navigate("/setAvatar");
+        navigate("/");
       }
     }
   };
