@@ -7,7 +7,7 @@ const AsideRight = () => {
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [id, setId] = useState("");
- 
+
   useEffect(() => {
     const asyncFn = async () => {
       const data = await JSON.parse(
@@ -28,15 +28,18 @@ const AsideRight = () => {
           <div className="flex w-full flex-col rounded-lg bg-white p-3 shadow-lg dark:text-white dark:bg-[#16181C] ">
             <div className="flex flex-col justify-center">
               <div className="relative flex justify-center">
-               
                 <img
                   src={`data:image/svg+xml;base64,${currentUserImage}`}
                   className=" bottom-0 w-[70%] p-2 rounded-lg "
                   alt=""
                 />
               </div>
-              <h1 className="text-center text-xl my-3 font-bold">{currentUserName}</h1>
-              <h3 className="text-center text-xs font-extralight">@{currentUserName}</h3>
+              <h1 className="text-center text-xl my-3 font-bold">
+                {currentUserName}
+              </h1>
+              <h3 className="text-center text-xs font-extralight">
+                @{currentUserName}
+              </h3>
               <div className="my-3 flex w-[100%]">
                 <div className="flex w-[33%] flex-col items-center">
                   <h1 className="text-lg font-bold">0</h1>
@@ -72,32 +75,6 @@ const AsideRight = () => {
                   d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
                 />
               </svg> */}
-
-                <button
-                  type="button"
-                  id="btn"
-                  class="w-full rounded
-                
-bg-black
-      px-6
-      py-2.5
-      text-xs
-      font-medium
-      uppercase
-      leading-tight
-      text-white
-      shadow-md
-      transition duration-150
-      ease-in-out  hover:shadow-lg 
-      focus:shadow-lg focus:outline-none
-      focus:ring-0
-     
-      active:shadow-lg"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  Create Post
-                </button>
               </div>
 
               <div
