@@ -1,40 +1,58 @@
 import React from "react";
 import "tw-elements";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const AsideRight = () => {
+  const [currentUserImage, setCurrentUserImage] = useState(undefined);
+  const [currentUserName, setCurrentUserName] = useState(undefined);
+  const [id, setId] = useState("");
+
+  useEffect(() => {
+    const asyncFn = async () => {
+      const data = await JSON.parse(
+        localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
+      )._id;
+      setId(data);
+      const dato = await axios.get(`http://localhost:5050/users/${data}`);
+      setCurrentUserName(dato.data.username);
+      setCurrentUserImage(dato.data.avatarImage);
+      console.log(data);
+    };
+    asyncFn();
+  }, []);
   return (
     <>
-      <div className="flex  w-[15%] flex-col gap-y-5 pt-[1.6%] max-lg:w-[25%] max-sm:hidden">
+      <div className="flex  w-[15%] flex-col gap-y-5 pt-[2%] max-lg:w-[25%] max-sm:hidden">
         <div className="fixed flex w-[15%]  justify-center max-lg:w-[25%]">
           <div className="flex w-full flex-col rounded-lg bg-white p-3 shadow-lg dark:bg-[#16181C] dark:text-white ">
             <div className="flex flex-col justify-center">
               <div className="relative flex justify-center">
                 <img
-                  src="https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000"
-                  className="relative h-[90%] rounded-lg"
-                  alt=""
-                />
-                <img
-                  src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"
-                  className="absolute bottom-0 w-[20%] rounded-lg "
+                  src={`data:image/svg+xml;base64,${currentUserImage}`}
+                  className=" bottom-0 w-[70%] rounded-lg p-2 "
                   alt=""
                 />
               </div>
-              <h1 className="text-center text-lg font-bold">Username</h1>
-              <h3 className="text-center text-xs font-extralight">@username</h3>
+              <h1 className="my-3 text-center text-xl font-bold">
+                {currentUserName}
+              </h1>
+              <h3 className="text-center text-xs font-extralight">
+                @{currentUserName}
+              </h3>
               <div className="my-3 flex w-[100%]">
                 <div className="flex w-[33%] flex-col items-center">
-                  <h1 className="text-lg font-bold">100</h1>
+                  <h1 className="text-lg font-bold">0</h1>
                   <h3 className="text-xs font-extralight opacity-60">Post</h3>
                 </div>
                 <div className="flex w-[33%] flex-col items-center">
-                  <h1 className="text-lg font-bold">100</h1>
+                  <h1 className="text-lg font-bold">10</h1>
                   <h3 className="text-xs font-extralight opacity-60">
                     Followers
                   </h3>
                 </div>
                 <div className="flex w-[33%] flex-col items-center">
-                  <h1 className="text-lg font-bold">100</h1>
+                  <h1 className="text-lg font-bold">5</h1>
                   <h3 className="text-xs font-extralight opacity-60">
                     Following
                   </h3>

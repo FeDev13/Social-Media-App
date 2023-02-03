@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
+import { format } from "timeago.js";
 import axios from "axios";
 
 const Post = ({ post }) => {
@@ -10,7 +11,24 @@ const Post = ({ post }) => {
   const [comments, setComments] = useState(post.comments);
   const [commentwriting, setcommentwriting] = useState("");
   const [user, setUser] = useState({});
+  const [currentUserName, setCurrentUserName] = useState(undefined);
+  const [id, setId] = useState("");
   const { user: currentUser } = useContext(AuthContext);
+  const PF = import.meta.env.VITE_PUBLIC_FOLDER;
+
+  useEffect(() => {
+    const asyncFn = async () => {
+      const data = await JSON.parse(
+        localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
+      )._id;
+      setId(data);
+      const dato = await axios.get(`http://localhost:5050/users/${data}`);
+      setCurrentUserName(dato.data.username);
+      setCurrentUserImage(dato.data.avatarImage);
+      console.log(data);
+    };
+    asyncFn();
+  }, []);
 
   //funcion de likes
   const likeHandler = () => {
@@ -67,11 +85,11 @@ const Post = ({ post }) => {
               />
             </svg>
             <div className="flex flex-col ">
-              <h2>{user.username}</h2>
+              <h2>{currentUserName}</h2>
               <div className="flex gap-4">
-                <h4 className="text-xs text-blue-800">Ubicacion</h4>
+                <h4 className="text-xs text-blue-800"></h4>
                 <h4 className="text-xs font-extralight opacity-70">
-                  2 hours ago
+                  {format(post.createdAt)}
                 </h4>
               </div>
             </div>
@@ -80,6 +98,8 @@ const Post = ({ post }) => {
         <p className="px-[2%] py-[1%] text-lg font-light max-lg:text-base">
           {post.desc}
         </p>
+        <img className="postImg" src={PF + post.img} alt="" />
+
         <div className="flex w-full items-center gap-6 border-t-2 p-[2%]  ">
           <div className="flex items-center gap-2">
             <svg
@@ -133,7 +153,7 @@ const Post = ({ post }) => {
             />
           </svg>
           <input
-            className="w-full rounded-lg bg-gray-100 p-2 pl-8 pr-16 text-sm outline-none"
+            className="w-full rounded-lg bg-gray-100 p-2 pl-8 pr-16 text-sm text-black outline-none"
             placeholder="Escribi tu comentario"
             onChange={(e) => setcommentwriting(e.target.value)}
           />

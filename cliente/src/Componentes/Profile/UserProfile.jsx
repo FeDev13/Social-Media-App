@@ -16,29 +16,29 @@ const UserProfile = () => {
     "bg-primary text-black mr-4 font-bold p-2 rounded-lg w-40 outline-none";
 
   return (
-    <div className="relative pb-2 h-full justify-center items-center">
+    <div className="relative h-full items-center justify-center pb-2">
       <div className="flex flex-col pb-5">
-        <div className="relative flex flex-col mb-7">
+        <div className="relative mb-7 flex flex-col">
           {/* imagen de fondo */}
-          <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-col items-center justify-center">
             <img
               src={bgImage} //hacerlo dinamico con la db
               alt=""
-              className="w-full h-60 2xl:h-510 shadow-lg object-cover rounded-lg"
+              className="2xl:h-510 h-60 w-full rounded-lg object-cover shadow-lg"
             />
             <img
               src={userimage}
-              className="rounded-full w-40 h-40 -mt-10 shadow-2xl object-cover"
+              className="-mt-10 h-40 w-40 rounded-full object-cover shadow-2xl"
               alt=""
             />
-            <h1 className="font-bold text-3xl text-center mt-3 mb-10">
+            <h1 className="mt-3 mb-10 text-center text-3xl font-bold">
               Usuario anonimo
             </h1>{" "}
-            <h5 className=" text-center mb-8 mt-0">
+            <h5 className=" mb-8 mt-0 text-center">
               {" "}
               Mar del Plata, Argentina
             </h5>
-            <div className=" flex flex-row mt-0 mb-10">
+            <div className=" mt-0 mb-10 flex flex-row">
               @user
               <li className=" mx-8">Trabajo actual</li>
               <li>Algo mas</li>
@@ -47,7 +47,7 @@ const UserProfile = () => {
           </div>
 
           {/* botones */}
-          <div className="text-center mb-7">
+          <div className="mb-7 text-center">
             <button
               type="button"
               onClick={(e) => {
