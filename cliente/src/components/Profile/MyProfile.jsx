@@ -146,7 +146,7 @@ export default function Profile() {
                                     Edit your profile
                                   </h1>
                                   <input
-                                    className="border-search rounded-lg p-2"
+                                    className="border-search rounded-lg p-2 text-black"
                                     placeholder="Change your name"
                                     type="text"
                                     value={username}
