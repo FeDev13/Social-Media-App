@@ -1,19 +1,18 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/auth");
 const messageRoutes = require("./routes/messages");
-const routerPosts = require("./routes/posts.route");
-const multer = require ("multer")
-const path = require ("path")
-
+const postRoutes = require("./routes/posts.route");
 const app = express();
 const socket = require("socket.io");
-require("dotenv").config();
+
+const multer = require("multer");
+const path = require("path");
 
 app.use(cors());
 app.use(express.json());
-app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 mongoose
   .connect(process.env.MONGO_URL, {
@@ -27,33 +26,19 @@ mongoose
     console.log(err.message);
   });
 
-  const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, "public/images");
-    },
-    filename: (req, file, cb) => {
-      cb(null, req.body.name);
-    },
-  });
-  
-  const upload = multer({ storage: storage });
-  app.post("/upload", upload.single("file"), (req, res) => {
-    try {
-      return res.status(200).json("archivo subido correctamente");
-    } catch (error) {
-      console.error(error);
-    }
-  });
+app.use(express.json());
+app.use(express.static(__dirname));
 app.use("/users", authRoutes);
 app.use("/messages", messageRoutes);
-app.use("/", routerPosts);
+app.use(postRoutes);
+app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 const server = app.listen(process.env.PORT, () =>
   console.log(`Server started on ${process.env.PORT}`)
 );
 const io = socket(server, {
   cors: {
-    origin: "http://127.0.0.1:5173",
+    origin: "http://localhost:5173",
     credentials: true,
   },
 });
@@ -71,6 +56,24 @@ io.on("connection", (socket) => {
       socket.to(sendUserSocket).emit("msg-recieve", data.msg);
     }
   });
+});
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/images");
+  },
+  filename: (req, file, cb) => {
+    cb(null, req.body.name);
+  },
+});
+
+const upload = multer({ storage: storage });
+app.post("/upload", upload.single("file"), (req, res) => {
+  try {
+    return res.status(200).json("archivo subido correctamente");
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 // const express = require("express");
