@@ -26,7 +26,7 @@ const NavSearch = () => {
       </a>
       <label className="flex ">
         <input
-          placeholder="Buscar"
+          placeholder="Search"
           className="bg-transparent pl-4 pr-10 text-black focus:outline-none "
           onChange={(e) => setBuscar(e.target.value)}
           value={buscar}

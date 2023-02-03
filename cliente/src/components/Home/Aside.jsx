@@ -83,13 +83,15 @@ const Aside = () => {
   useEffect(() => {
     getFollowerUsers();
   }, [allUsers]);
+
+
   const getFollowerUsers = async () => {
     const followingResponse = await axios.get(
       `http://localhost:5050/users/follow/${userId}`
     );
     setFollowing(followingResponse.data);
   };
-
+console.log(following);
   useEffect(() => {
     setNotFollowing(
       allUsers.filter((user) => !Object.values(following).includes(user._id))
@@ -113,7 +115,7 @@ const Aside = () => {
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
-              stroke="white"
+              stroke="black"
               className="top-8 left-6 absolute w-5 h-5 opacity-70 dark:stroke-white"
             >
               <path
@@ -126,8 +128,7 @@ const Aside = () => {
           <div className="w-full flex flex-col gap-y-1">
             {loading && notFollowing.length > 0 && (
               <>
-            <h4 className=" text-sm  mt-4 mb-2  pl-6 text font-semibold">
-             
+            <h4 className=" text-sm  mt-2 mb-2  text font-semibold text-center">
               RECOMMENDATION
             </h4>
                 {notFollowing.slice(0, 5).map((Element) => {
@@ -156,7 +157,7 @@ const Aside = () => {
                           id={Element._id}
                           onClick={() => handleFollow(Element._id)}
                         >
-                          Seguir
+                          Follow
                         </button>
                       </div>
                     </>
@@ -166,10 +167,10 @@ const Aside = () => {
             )}
           </div>
           <div className="w-full">
-            <h4 className=" text-sm  mt-8 mb-2  ml-6 text font-semibold">
+            <h4 className=" text-sm text font-semibold text-center p-2">
             FOLLOWING
             </h4>
-            {allUsers.slice(5, 10).map((Element) => {
+            {allUsers.slice(3,8).map((Element) => {
               return (
                 <>
                   <div className="flex justify-between p-2 items-center max-xl:px-0 ">
@@ -179,22 +180,10 @@ const Aside = () => {
                         src={`data:image/svg+xml;base64,${Element.avatarImage}`}
                         className="w-12 h-10"
                       />
+                      <div className="w-[80%]">
                       <h3 className=" font-extralight">{Element.username}</h3>
-
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="blue"
-                        className="w-6 h-6 plus"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M12 6v12m6-6H6"
-                        />
-                      </svg>
+                      </div>
+                     
                     </div>
                   </div>
                 </>

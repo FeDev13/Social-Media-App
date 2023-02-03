@@ -1,18 +1,18 @@
 import React from "react";
 import Navbar from "../Navbar/Navbar";
 import Logout from "../Logout";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 export default function Profile() {
-    const navigate = useNavigate();
-    const [values, setValues] = useState({ username: "", password: "" });
-    const [user, setUser] = useState(null);
-    const [currentUserImage, setCurrentUserImage] = useState(undefined);
-    const [currentUserName, setCurrentUserName] = useState(undefined);
-    const [username, setUsername] = useState("");
-    const [id, setId] = useState("");
-    const [background, setBackground] = useState("");
+  const navigate = useNavigate();
+  const [values, setValues] = useState({ username: "", password: "" });
+  const [user, setUser] = useState(null);
+  const [currentUserImage, setCurrentUserImage] = useState(undefined);
+  const [currentUserName, setCurrentUserName] = useState(undefined);
+  const [username, setUsername] = useState("");
+  const [id, setId] = useState("");
+  const [background, setBackground] = useState("");
 
   // Si no hay usuario te redirecciona a login
 
@@ -45,7 +45,7 @@ export default function Profile() {
     };
     asyncFn();
   }, []);
-console.log(setCurrentUser)
+  console.log(setCurrentUser);
   const handleClick = async (e) => {
     e.preventDefault();
     try {
@@ -61,7 +61,7 @@ console.log(setCurrentUser)
       );
       setCurrentUserName(username);
       setBackground(background);
-      window.location.reload()
+      window.location.reload();
       console.log(resp.data);
     } catch (error) {
       console.log(error.response);
@@ -70,44 +70,38 @@ console.log(setCurrentUser)
 
   return (
     <>
+      <section>
+        <Navbar />
 
-    
-
-<section>
-      <Navbar />
-      <form onSubmit={handleClick} encType="multipart/form-data">
-        <div className="relative pb-2 h-full mt-20 justify-center items-center">
-          <div className="flex flex-col pb-5 dark:text-white">
-            <div className="relative flex flex-col mb-7">
-              {/* imagen de fondo */}
-              <div className="flex flex-col justify-center items-center">
-                <img
-                   src={background}//hacerlo dinamico con la db
-                  alt=""
-                  className="w-full h-60 2xl:h-510 shadow-lg object-cover rounded-lg"
-                />
-                <img
-                  src={`data:image/svg+xml;base64,${currentUserImage}`}
-                  className="rounded-full w-40 h-40 -mt-10 shadow-2xl object-cover"
-                  alt=""
-                />
-                <h1 className="font-bold text-3xl text-center mt-3 mb-10">
-                  {currentUserName}
-                </h1>{" "}
-                <h5 className=" text-center mb-8 mt-0">
-                  {" "}
-                  descrpcion
-                </h5>
-                <div className=" flex flex-row mt-0 mb-10">
-                  @{currentUserName}
-           
+        <form onSubmit={handleClick} encType="multipart/form-data">
+          <div className="relative pb-2 h-full mt-20 justify-center items-center">
+            <div className="flex flex-col pb-5 dark:text-white">
+              <div className="relative flex flex-col mb-7">
+                {/* imagen de fondo */}
+                <div className="flex flex-col justify-center items-center">
+                  <img
+                    src={background} //hacerlo dinamico con la db
+                    alt=""
+                    className="w-full h-60 2xl:h-510 shadow-lg object-cover rounded-lg"
+                  />
+                  <img
+                    src={`data:image/svg+xml;base64,${currentUserImage}`}
+                    className="rounded-full w-40 h-40 -mt-10 shadow-2xl object-cover"
+                    alt=""
+                  />
+                  <h1 className="font-bold text-3xl text-center mt-3 mb-10">
+                    {currentUserName}
+                  </h1>{" "}
+                  <h5 className=" text-center mb-8 mt-0"> descrpcion</h5>
+                  <div className=" flex flex-row mt-0 mb-10">
+                    @{currentUserName}
+                  </div>
+                  {/*hacerlo dinamico*/}
                 </div>
-                {/*hacerlo dinamico*/}
-              </div>
 
-              {/* botones */}
-              <div className="text-center mb-7">
-                {/* <Link to='/chat' className="py-3 px-6 container rounded-lg ">
+                {/* botones */}
+                <div className="text-center mb-7">
+                  {/* <Link to='/chat' className="py-3 px-6 container rounded-lg ">
         <button
           type="button"
           onClick={(e) => {
@@ -119,43 +113,85 @@ console.log(setCurrentUser)
           Mensajes
         </button>
         </Link > */}
-                <div className="flex justify-center gap-4">
-                  <Link to="/" className=" w-[20%]">
-                    <Logout />
-                  </Link>
-                  <button
-                    className="border w-[20%] container cursor-pointer rounded-lg"
-                    type="submit"
-                  >
-                    Editar Perfil
-                  </button>
-                  <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-
-                  <label
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    for="file_input"
-                  >
-                    Upload file
-                  </label>
-                  <input
-                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                    id="file_input"
-                    type="file"
-                    onChange={(e) => setBackground(e.target.files)}
-                  />
+                  <div className="flex justify-center gap-4">
+                    <div className="w-full flex justify-center">
+                      <div className="w-full flex gap-3 justify-center">
+                        <Link to="/" className=" w-[10%]">
+                          <Logout />
+                        </Link>
+                        <button
+                          type="button"
+                          id="btn"
+                          className="border w-[10%] container cursor-pointer rounded-lg"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModalEdit"
+                        >
+                          Editar Perfil
+                        </button>
+                      </div>
+                      <div
+                        className="modal fade fixed hidden h-full w-[30%] top-[50%] right-24 overflow-y-auto overflow-x-hidden outline-none"
+                        id="exampleModalEdit"
+                        tabindex="-1"
+                        aria-labelledby="exampleModalEdit"
+                        aria-modal="true"
+                        role="dialog"
+                      >
+                        <div className="flex h-[20%] w-[60%] m-auto   bg-white  dark:bg-[#16181C] dark:text-white shadow-lg rounded-lg ">
+                          <div class="modal-dialog pointer-events-none relative w-full ">
+                            <div class="modal-content pointer-events-auto relative flex w-full flex-col rounded-md shadow-lg border-search bg-white dark:bg-[#16181C] bg-clip-padding text-current outline-none">
+                              <div class="modal-body relative p-4  ">
+                                <div className="flex w-full flex-col gap-4 justify-center items-center">
+                                  <h1 className="font-bold">
+                                    Edit your profile
+                                  </h1>
+                                  <input
+                                    className="border-search rounded-lg p-2"
+                                    placeholder="Change your name"
+                                    type="text"
+                                    value={username}
+                                    onChange={(e) =>
+                                      setUsername(e.target.value)
+                                    }
+                                  />
+                                  <div className="flex flex-col items-center gap-2 ">
+                                    <label
+                                      class=" font-bold text-sm text-gray-900 dark:text-white"
+                                      for="file_input"
+                                    >
+                                      Set background
+                                    </label>
+                                    <input
+                                      className=" w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointe "
+                                      id="file_input"
+                                      type="file"
+                                      onChange={(e) =>
+                                        setBackground(e.target.files)
+                                      }
+                                    />
+                                  </div>
+                                  <button
+                                    className="border w-[50%] container cursor-pointer rounded-lg font-extralight p-2 text-white"
+                                    type="submit"
+                                  >
+                                    Guardar
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {/* <a href="/Login"> */}
+                    {/* <button  onClick={hadndleLogout} className="dark:text-white bg-blue-600 text-white font-bold p-2 rounded-lg shadow-lg w-40 outline-none">salir</button></a> */}
+                  </div>
                 </div>
-                {/* <a href="/Login"> */}
-                {/* <button  onClick={hadndleLogout} className="dark:text-white bg-blue-600 text-white font-bold p-2 rounded-lg shadow-lg w-40 outline-none">salir</button></a> */}
               </div>
             </div>
           </div>
-        </div>
-      </form>
-    </section> 
-</>)
-
+        </form>
+      </section>
+    </>
+  );
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import NavSearch from "./NavSearch";
 import "tw-elements";
 import ColorItem from "../Home/color-item";
@@ -17,8 +17,6 @@ const Navbar = () => {
   const [followers, setFollowers] = useState([]);
   const [id, setId] = useState("");
 
-
- 
   useEffect(() => {
     const asyncFn = async () => {
       const data = await JSON.parse(
@@ -26,25 +24,12 @@ const Navbar = () => {
       )._id;
       setId(data);
       const dato = await axios.get(`http://localhost:5050/users/${data}`);
-      setFollowers(dato.data.following)
-
-      axios.get('http://localhost:5050/users/allusers/')
-      .then(response => {
-        response.data.forEach(item => {
-          followers[item.id] = item;
-          setFollowers(followers)
-        });
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  
-     
+      setFollowers(dato.data.following);
     };
     asyncFn();
   }, []);
+console.log(followers);
 
- 
   const setColor = (event) => {
     const currentColor = event.target.style.getPropertyValue("--bg-color");
 
@@ -68,10 +53,10 @@ const Navbar = () => {
     >
       <div className="flex">
         <div className="flex items-center max-sm:hidden">
-        <Link to="/">
-          <h1 className="pl-8 text-3xl uppercase text-white max-xl:text-2xl max-lg:p-0 max-lg:text-xl">
-            Social media app
-          </h1>
+          <Link to="/">
+            <h1 className="pl-8 text-3xl uppercase text-white max-xl:text-2xl max-lg:p-0 max-lg:text-xl">
+              Social media app
+            </h1>
           </Link>
         </div>
         {/* <div
@@ -197,8 +182,7 @@ const Navbar = () => {
                 </div>
                 <div className="flex gap-6 p-3 items-center">
                   <h1>Thema:</h1>
-                    <Toggle />
-                  
+                  <Toggle />
                 </div>
               </div>
               <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t border-gray-200 p-4">
@@ -268,88 +252,68 @@ const Navbar = () => {
             />
           </svg>
         </Link>
-       <div class="flex justify-center">
-          <div>
-            <div class="dropdown relative">
-              <button
-                
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="white"
-          className="h-6 w-6"
+        <button
+          type="button"
+          id="btn"
+          className="w-full rounded        
+    bg-white
+      text-xs
+      font-medium
+      text-black
+      transition duration-150
+      ease-in-out"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModalNotificacion"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
-          />
-        </svg>
-               
-              </button>
-              <ul
-                class="
-          dropdown-menu
-          min-w-max
-          absolute
-          hidden
-          bg-white
-          text-base
-          z-50
-          float-left
-          py-2
-          list-none
-          text-left
-          rounded-lg
-          shadow-lg
-          mt-1
-          m-0
-          bg-clip-padding
-          border-none
-        "
-                aria-labelledby="dropdownMenuButton1"
-              >
-             
-                
-              
-               
-     {followers.map((Element) => {
-                return (
-                    
-                    <>
-                     <li>
-                  <a href={"/Profile/" + Element }
-                    className="
-              dropdown-item
-              text-sm
-              py-2
-              px-4
-              font-normal
-              block
-              w-full
-              whitespace-nowrap
-              bg-transparent
-              text-gray-700
-              hover:bg-gray-100
-            "
-                    
-                  >
-                    <h1>{Element} ha empezado a seguirte</h1>
-                    </a>
-                </li>
-                    </>
-                    
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="white"
+            className="h-6 w-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
+            />
+          </svg>
+        </button>
 
-                  )})}
-                
-              </ul>
+        <div
+          className="modal fade fixed hidden  h-full w-[20%] top-[7%] right-0 overflow-y-auto overflow-x-hidden outline-none"
+          id="exampleModalNotificacion"
+          tabindex="-1"
+          aria-labelledby="exampleModalNotificacion"
+          aria-modal="true"
+          role="dialog"
+        >
+          <div className="flex h-[70%] w-[90%] m-auto bg-white  dark:bg-[#16181C] dark:text-white shadow-lg rounded-lg ">
+            <div class="modal-dialog pointer-events-none relative w-full ">
+              <div class="modal-content pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white dark:bg-[#16181C] bg-clip-padding text-current outline-none">
+                <div class="modal-body relative p-4  ">
+                  <div className="flex w-full justify-center">
+                    <h1 className="text-lg font-light mb-5 mt-2">
+                      Notificaciones
+                    </h1>
+                  </div>
+                  {followers.map((Element) => {
+                    return (
+                      <>
+                        <a href={"/Profile/" + Element} className="">
+                          <div className="relative flex w-[100%] py-3 border-notificacion gap-5 p-[2%] items-center text-black dark:text-white justify-center ">
+                            <h1 className="font-extralight">
+                              <span className="font-bold">{Element}</span> ha
+                              comenzado a seguirte.
+                            </h1>
+                          </div>
+                        </a>
+                      </>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -368,7 +332,7 @@ const Navbar = () => {
               d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
             />
           </svg>
-          </Link>
+        </Link>
         {/* <div
           className={`absolute top-16 duration-500  ${
             menuState ? "w-full md:w-2/3 lg:w-2/4" : "h-0 w-0"
