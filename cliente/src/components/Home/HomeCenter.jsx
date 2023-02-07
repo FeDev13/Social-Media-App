@@ -22,7 +22,7 @@ export function HomeCenter({ username }) {
   };
   useEffect(() => {
     fetchData();
-  }, [username, user._id]);
+  }, []);
 
   return (
     //trae todos los posts de los users

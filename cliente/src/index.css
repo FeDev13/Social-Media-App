@@ -76,3 +76,8 @@
   border: 2px solid  ;
   border-color: var(--bg-color);
 }
+
+.leaflet-container{
+  width: 30vw;
+  height: 30vw;
+}

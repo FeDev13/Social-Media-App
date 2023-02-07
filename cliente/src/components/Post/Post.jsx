@@ -12,6 +12,7 @@ const Post = ({ post }) => {
   const [commentwriting, setcommentwriting] = useState("");
   const [user, setUser] = useState({});
   const [currentUserName, setCurrentUserName] = useState(undefined);
+  const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [id, setId] = useState("");
   const { user: currentUser } = useContext(AuthContext);
   const PF = import.meta.env.VITE_PUBLIC_FOLDER;
@@ -66,24 +67,11 @@ const Post = ({ post }) => {
         <div className="flex h-16 w-full p-2">
           <div className="relative  flex w-full cursor-pointer items-center gap-4">
             <img
-              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+              src={currentUserImage}
               className="h-12 w-12 rounded-lg"
               alt=""
             />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="absolute top-0 right-0 h-6 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-              />
-            </svg>
+
             <div className="flex flex-col ">
               <h2>{currentUserName}</h2>
               <div className="flex gap-4">
@@ -99,6 +87,13 @@ const Post = ({ post }) => {
           {post.desc}
         </p>
         <img className="postImg" src={PF + post.img} alt="" />
+        <video controls width="full">
+          {" "}
+          <source
+            src="C:\Users\Fede\Downloads\Y2Mate.is - When Junior developer becomes Senior Programmer pt.2 #shorts-Ne3mvOBNalo-144p-1659418025850.mp4"
+            type="video/mp4"
+          />
+        </video>
 
         <div className="flex w-full items-center gap-6 border-t-2 p-[2%]  ">
           <div className="flex items-center gap-2">
