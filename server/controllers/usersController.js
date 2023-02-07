@@ -180,8 +180,9 @@ module.exports.updateUser = async (req, res) => {
   const url = req.protocol + "://" + req.get("host");
   const urlImage = url + "/upload/" + req.file.filename;
   let modelData = {
-    username: req.body.username,
     background: urlImage,
+    descripcion: req.body.descripcion,
+    username: req.body.username,
   };
   await User.updateOne({ _id: id }, modelData);
   res.json({ message: "Usuario Modificado" });

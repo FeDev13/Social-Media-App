@@ -13,6 +13,8 @@ export default function Profile() {
   const [username, setUsername] = useState("");
   const [id, setId] = useState("");
   const [background, setBackground] = useState("");
+  const [currentDescripcion, setCurrentDescripcion] = useState("");
+  const [descripcion, setDescripcion] = useState("");
 
   // Si no hay usuario te redirecciona a login
 
@@ -42,6 +44,7 @@ export default function Profile() {
       setCurrentUserName(dato.data.username);
       setBackground(dato.data.background);
       setCurrentUserImage(dato.data.avatarImage);
+      setCurrentDescripcion(dato.data.descripcion);
     };
     asyncFn();
   }, []);
@@ -51,6 +54,7 @@ export default function Profile() {
     try {
       var bodyFormData = new FormData();
       bodyFormData.append("username", username);
+      bodyFormData.append("descripcion", descripcion);
       bodyFormData.append("background", background[0]);
       const resp = await axios.put(
         `http://localhost:5050/users/${id}`,
@@ -60,6 +64,7 @@ export default function Profile() {
         }
       );
       setCurrentUserName(username);
+      setCurrentDescripcion(descripcion);
       setBackground(background);
       window.location.reload();
       console.log(resp.data);
@@ -67,7 +72,6 @@ export default function Profile() {
       console.log(error.response);
     }
   };
-
   return (
     <>
       <section>
@@ -91,8 +95,8 @@ export default function Profile() {
                   />
                   <h1 className="font-bold text-3xl text-center mt-3 mb-10">
                     {currentUserName}
-                  </h1>{" "}
-                  <h5 className=" text-center mb-8 mt-0"> descrpcion</h5>
+                  </h1>
+                  <h5 className=" text-center mb-8 mt-0"> {currentDescripcion}</h5>
                   <div className=" flex flex-row mt-0 mb-10">
                     @{currentUserName}
                   </div>
@@ -154,6 +158,16 @@ export default function Profile() {
                                       setUsername(e.target.value)
                                     }
                                   />
+                                    <input
+                                    className="border-search rounded-lg p-2 text-black"
+                                    placeholder="Change your description"
+                                    type="text"
+                                    value={descripcion}
+                                    onChange={(e) =>
+                                      setDescripcion(e.target.value)
+                                    }
+                                  />
+                                  
                                   <div className="flex flex-col items-center gap-2 ">
                                     <label
                                       class=" font-bold text-sm text-gray-900 dark:text-white"

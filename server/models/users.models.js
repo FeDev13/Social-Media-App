@@ -17,7 +17,7 @@ const UserSchema = new Schema({
   },
   descripcion:{
     type: String,
-    default: "",
+    default:'',
   },
   background: {
     type: String,
