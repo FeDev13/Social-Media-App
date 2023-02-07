@@ -17,13 +17,29 @@ const userPost = () => {
   /* const [open, setOpen] = useState(false); */
   const [file, setFile] = useState(null);
   const [video, setVideo] = useState(null);
+  const [id, setId] = useState(null);
+  const [profile, setProfile] = useState(null);
   const desc = useRef();
-
+  
+  
+  const fetchData = async () => {
+    const data = await JSON.parse(
+      localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
+    )._id;
+    setId(data);
+    const res = await axios.get(`http://localhost:5050/users/${data}`);
+   console.log(res);
+  setProfile(res.data);
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   const submitPost = async (e) => {
     e.preventDefault();
     const newPost = {
-      userId: user._id,
+      userId: id,
       desc: desc.current.value,
+      user: profile,
     };
 
     /* const handleKey = (e) => {

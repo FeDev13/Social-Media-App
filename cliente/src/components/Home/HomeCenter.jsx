@@ -10,6 +10,19 @@ export function HomeCenter({ username }) {
   const url = "http://localhost:5050/posts/";
   const [data, setData] = useState([]);
   const { user } = useContext(AuthContext);
+  const [dataUser, setDataUser] = useState([]);
+  const [avatarUser, setAvatarUser] = useState([]);
+
+  // useEffect(() => {
+  //   const asyncFn = async () => {
+  //     const dato = await axios.get(`http://localhost:5050/posts/`);
+  //     setDataUser(dato.data[0].user[0].username);
+  //     setAvatarUser(dato.data[0].user[0].avatarImage);
+
+  //     console.log(dataUser);
+  //   };
+  //   asyncFn();
+  // }, [dataUser]);
 
   const fetchData = async () => {
     const res = await axios.get(url);
@@ -17,12 +30,13 @@ export function HomeCenter({ username }) {
       res.data.sort((p1, p2) => {
         return new Date(p2.createdAt) - new Date(p1.createdAt);
       })
-    );
-    console.log(res);
+      );
+      console.log(res.data);
+    setDataUser(data[0].user[0].username)
   };
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [dataUser]);
 
   return (
     //trae todos los posts de los users
@@ -33,7 +47,8 @@ export function HomeCenter({ username }) {
         {data.map((post) => {
           return (
             <>
-              <Post key={post.id} post={post} />
+            <h1>{post.user[0].username}</h1>
+              <Post key={post.id} id={post.user[0]._id} post={post} />
             </>
           );
         })}

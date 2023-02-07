@@ -42,7 +42,7 @@ const io = socket(server, {
     credentials: true,
   },
 });
-
+mongoose.set("strictPopulate", false);
 global.onlineUsers = new Map();
 io.on("connection", (socket) => {
   global.chatSocket = socket;

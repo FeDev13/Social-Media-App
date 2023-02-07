@@ -94,12 +94,9 @@ const Aside = () => {
     setNotFollowing(
       allUsers.filter((user) => !Object.values(following).includes(user._id))
     );
-    console.log(notFollowing);
     setLoading(true);
   }, [following]);
 
-  console.log(allUsers);
-  console.log(following);
   return (
     <>
       <div className="w-[15%] py-[2%] gap-y-10  justify-center  flex max-lg:hidden">
