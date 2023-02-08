@@ -1,10 +1,10 @@
-const Messages = require("../models/messageModel");
+const {Message} = require("../models/messageModel");
 
 module.exports.getMessages = async (req, res, next) => {
   try {
     const { from, to } = req.body;
 
-    const messages = await Messages.find({
+    const messages = await Message.find({
       users: {
         $all: [from, to],
       },
@@ -25,7 +25,7 @@ module.exports.getMessages = async (req, res, next) => {
 module.exports.addMessage = async (req, res, next) => {
   try {
     const { from, to, message } = req.body;
-    const data = await Messages.create({
+    const data = await Message.create({
       message: { text: message },
       users: [from, to],
       sender: from,

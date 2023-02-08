@@ -1,53 +1,112 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const bcrypt = require("bcrypt");
-const UsersSchema = new Schema({
-  fullname:{
-    type: String,
-    min: 3,
-    max: 30,
-    default: ""
-},
-username:{
-    type: String,
-   unique: true
-},
-email: {
+
+const UserSchema = new Schema({
+  username: {
     type: String,
     required: true,
+    min: 3,
+    max: 20,
+    unique: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
     max: 50,
-    unique: true
-},
-password:{
+  },
+  descripcion:{
     type: String,
-    require: true,
-    min: 8
-},
-profilePicture:{
+    default: "",
+  },
+  background: {
     type: String,
-    default: "/default_avatar.jpg"
-},
-followers: {
-    type: Array,
-    default: []
-},
-following: {
-    type: Array,
-    default: []
-},
-
-bio:{
+    default: "",
+  },
+  password: {
     type: String,
-    max: 500,
-    default: ""
-}
-},
-{timestamps: true});
-const User = mongoose.model("users", UsersSchema);
+    required: true,
+    min: 8,
+  },
+  followers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  following: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  isAvatarImageSet: {
+    type: Boolean,
+    default: false,
+  },
+  avatarImage: {
+    type: String,
+    default: "https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png",
+  },
+});
 
+module.exports = mongoose.model("User", UserSchema);
 
+// const mongoose = require("mongoose");
 
-module.exports = {
-  User,
+// const userSchema = new mongoose.Schema({
+//   username: {
+//     type: String,
+//     required: true,
+//     min: 3,
+//     max: 20,
+//     unique: true,
+//   },
+//   email: {
+//     type: String,
+//     required: true,
+//     unique: true,
+//     max: 50,
+//   },
+//   password: {
+//     type: String,
+//     required: true,
+//     min: 8,
+//   },
+//   isAvatarImageSet: {
+//     type: Boolean,
+//     default: false,
+//   },
+//   likes: {
+//     type: Array,
+//     default: []
+// },
+//   avatarImage: {
+//     type: String,
+//     default: "",
+//   },
+// });
 
-};
+// const FollowSchema = new mongoose.Schema({
+//   follower: {
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: "User",
+//     required: true
+//   },
+//   following: {
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: "User",
+//     required: true
+//   }
+// });
+
+// module.exports = { User: mongoose.model("User", userSchema), Follow: mongoose.model("Follow", FollowSchema) };
+
+// module.exports = {
+//   User,
+//   Follow,
+// }
