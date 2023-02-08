@@ -63,7 +63,7 @@ const likePost = async (req, res) => {
 
 const comentPost = async (req, res) => {
   const post = await Post.findById(req.params.id);
-  console.log(req.body);
+  // console.log(req.body);
   try {
     if (post) {
       await post.updateOne({ $push: { comments: req.body } });
@@ -75,6 +75,18 @@ const comentPost = async (req, res) => {
   }
 };
 
+const findByPost = async (req, res) => {
+  const { id } = req.params;
+  Post.findById(id)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch(() => {
+      res.json({ message: "Id no encontrado" });
+    });
+};
+
+
 module.exports = {
   friendPost,
   createPost,
@@ -82,4 +94,6 @@ module.exports = {
   likePost,
   comentPost,
   getAllPosts,
+  findByPost,
+
 };
