@@ -23,7 +23,7 @@ const AsideRight = () => {
       );
       const dataFollower = responseFollower.data;
       setFollowers(dataFollower);
-      console.log(followers);
+      
     };
     fetchFollowers();
   }, []);
@@ -38,7 +38,7 @@ const AsideRight = () => {
       );
       const dataFollowing = responseFollowing.data;
       setFollowing(dataFollowing);
-      console.log(following);
+    
     };
     fetchFollowing();
   }, []);
@@ -49,7 +49,7 @@ const AsideRight = () => {
         const response = await axios.get(
           `http://localhost:5050/users/${following}`
         );
-        console.log(response);
+        
         return response.data;
       });
 
@@ -66,7 +66,7 @@ const AsideRight = () => {
         const response = await axios.get(
           `http://localhost:5050/users/${followers}`
         );
-        console.log(response);
+      
         return response.data;
       });
 
@@ -93,7 +93,7 @@ const AsideRight = () => {
     };
     asyncFn();
   }, []);
-  console.log(post)
+ 
   return (
     <>
       <div className="flex  w-[25%] flex-col gap-y-5 pt-[2%] max-lg:w-[25%] max-sm:hidden">

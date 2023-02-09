@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import { allUsersRoute } from "../../utils/APIRoutes";
 import { Emoji } from "emoji-picker-react";
@@ -10,6 +11,22 @@ export function Search() {
   const url = `http://localhost:5050/users`;
   const [users, setUsers] = useState([]);
   const [id, setId] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const asyncFn = async () => {
+      if (!localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)) {
+        navigate("/login");
+      } else {
+        setCurrentUser(
+          await JSON.parse(
+            localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
+          )
+        );
+      }
+    };
+    asyncFn();
+  }, []);
 
   useEffect(() => {
     async function productosDB() {

@@ -13,7 +13,7 @@ export default function Welcome() {
     asyncFn();
   }, []);
   return (
-    <section className="flex justify-center items-center text-black dark:bg-[#22232c] flex-col bg-white dark:text-white">
+    <section className="flex justify-center items-center text-black dark:bg-[#22232c] flex-col fondo dark:text-white">
       <img src={Robot} alt="" className="h-[20rem]" />
       <h1>
         Welcome, <span className="text">{userName}!</span>

@@ -21,17 +21,17 @@ export default function Contacts({ contacts, changeChat }) {
   return (
     <>
       {currentUserImage && currentUserImage && (
-        <section className=" grid grid-rows-[10%,75%,15%] mt-5 overflow-hidden bg-white dark:bg-[#22232c] ">
+        <section className=" grid grid-rows-[10%,75%,15%] mt-5 overflow-hidden bg-white dark:bg-[#16181C] ">
           <div className="flex justify-center items-center mt-4 gap-[2rem] ">
             <h3 className="text-black dark:text-white font-bold " >CHATS</h3>
           </div>
-          <div className="flex flex-col  overflow-auto gap-[0.8rem]">
+          <div className="flex flex-col overflow-auto gap-[0.8rem]">
             {contacts.map((contact, index) => {
               return (
                 <div
                   key={contact._id}
                   className={`contact ${
-                    index === currentSelected ? "container w-full p-3 text-white dark:text-black flex items-center justify-center gap-[2rem]" : " text-black dark:text-white flex items-center justify-center gap-[2rem]"
+                    index === currentSelected ? "container w-full p-3 text-white dark:text-black flex items-center  gap-[2rem]" : " text-black dark:text-white flex items-center mx-3 px-5 py-2  gap-[3rem]"
                   }`}
                   onClick={() => changeCurrentChat(index, contact)}
                 >

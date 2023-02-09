@@ -19,6 +19,7 @@ const Navbar = () => {
   const [id, setId] = useState("");
   const [userData, setUserData] = useState([]);
   const [Color, setCurrentColor] = useState("#2ABA7D");
+  const [lista, setLista] = useState([]);
  
    useEffect(() => {
      const fetchFollowers = async () => {
@@ -30,7 +31,7 @@ const Navbar = () => {
        );
        const data1 = response.data;
        setFollowers(data1);
-       console.log(followers);
+       
      };
  
      fetchFollowers();
@@ -48,11 +49,11 @@ const Navbar = () => {
  
        const data = await Promise.all(promises);
        setUserData(data);
+       setLista(data.reverse());
      };
  
      fetchUserData();
    }, [followers]);
-
 
 
   useEffect(() => {
@@ -81,7 +82,6 @@ const Navbar = () => {
     setTheme(currentColor);
     localStorage.setItem("color", currentColor);
   };
-  console.log(currentColor)
 
   useEffect(() => {
     const currentColor = localStorage.getItem("color");
@@ -344,18 +344,19 @@ const Navbar = () => {
                       Notificaciones
                     </h1>
                   </div>
-                  {userData.map((Element) => {
+                  {lista.map((Element) => {
                               return (
                                 <>
                                   <a
                                     href={"/Profile/" + Element._id}
                                     className=""
                                   >
-                                    <div className="relative flex w-[100%] py-3 border-notificacion gap-5 p-[2%] items-center text-black dark:text-white justify-center ">
+                                    <div className="relative flex w-full py-3 border-notificacion gap-5 p-[2%] items-center text-black dark:text-white ">
                                       <div className="w-[15%]">
                                       <img
                                         src={`data:image/svg+xml;base64,${Element.avatarImage}`}
                                         alt=""
+                                        className=""
                                       />
                                       </div>
                                       <h1 className="font-extralight">

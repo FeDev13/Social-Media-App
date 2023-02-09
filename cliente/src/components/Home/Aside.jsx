@@ -139,12 +139,12 @@ const Aside = () => {
                             className="flex items-center justify-evenly w-full "
                             href={"/Profile/" + Element._id}
                           >
+                            <div className="w-full text-center flex items-center gap-4">
                             <img
                               alt=""
                               src={`data:image/svg+xml;base64,${Element.avatarImage}`}
                               className="w-12 h-10"
                             />
-                            <div className="w-full text-center">
                               <h3 className=" font-extralight">
                                 {Element.username}
                               </h3>
