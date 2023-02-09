@@ -135,7 +135,7 @@ const Post = ({ post, userprofile, video }) => {
         </div>
         <div className="relative flex w-[100%] gap-5 p-[2%] ">
           <img
-            src={`data:image/svg+xml;base64,${userprofile.avatarImage}`}
+            src={`data:image/svg+xml;base64,${currentUserImage}`}
             className="h-12 w-12 rounded-lg"
             alt=""
           />

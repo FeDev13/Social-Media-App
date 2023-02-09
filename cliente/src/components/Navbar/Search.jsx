@@ -10,12 +10,15 @@ export function Search() {
   const url = `http://localhost:5050/users`;
   const [users, setUsers] = useState([]);
   const [id, setId] = useState("");
+
   useEffect(() => {
     async function productosDB() {
       const data = await axios.get(allUsersRoute);
       setUsers(data.data);
+ 
     }
     console.log(users);
+    
     productosDB();
   }, []);
 
@@ -53,13 +56,8 @@ export function Search() {
                   <h3 className="text-center text-xs font-bold">
                     @{Element.username}
                   </h3>
-                  <div className="my-3 flex w-[100%]">
-                    <div className="flex w-[33%] flex-col items-center">
-                      <h1 className="text-lg font-bold">0</h1>
-                      <h3 className="text-xs font-extralight opacity-60">
-                        Post
-                      </h3>
-                    </div>
+                  <div className="my-3 flex w-[100%] justify-center">
+                    
                     <div className="flex w-[33%] flex-col items-center">
                       <h1 className="text-lg font-bold">{Element.following.length}</h1>
                       <h3 className="text-xs font-extralight opacity-60">

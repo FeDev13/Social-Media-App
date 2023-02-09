@@ -14,9 +14,11 @@ const Navbar = () => {
   let nav = document.getElementById("nav");
   let plus = document.getElementById("plus");
   const colors = ["#ff6961", "#2ABA7D", "#84b6f4", "#fdcae1"];
+ 
   const [followers, setFollowers] = useState([]);
   const [id, setId] = useState("");
   const [userData, setUserData] = useState([]);
+  const [Color, setCurrentColor] = useState("#2ABA7D");
  
    useEffect(() => {
      const fetchFollowers = async () => {
@@ -66,12 +68,20 @@ const Navbar = () => {
   }, []);
 
 
+  const defaultColor = "#2ABA7D";
+  let currentColor = defaultColor;
+  
   const setColor = (event) => {
-    const currentColor = event.target.style.getPropertyValue("--bg-color");
-
+    currentColor = event.target.style.getPropertyValue("--bg-color");
+  
+    if (currentColor === "undefined") {
+      currentColor = defaultColor;
+    }
+  
     setTheme(currentColor);
     localStorage.setItem("color", currentColor);
   };
+  console.log(currentColor)
 
   useEffect(() => {
     const currentColor = localStorage.getItem("color");

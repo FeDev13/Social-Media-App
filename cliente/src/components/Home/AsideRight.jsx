@@ -11,6 +11,7 @@ const AsideRight = () => {
   const [id, setId] = useState("");
   const [userDataFollowers, setUserDataFollowers] = useState([]);
   const [userDataFollowing, setUserDataFollowing] = useState([]);
+  const [post, setPost] = useState([]);
 
   useEffect(() => {
     const fetchFollowers = async () => {
@@ -87,10 +88,12 @@ const AsideRight = () => {
       setCurrentUserImage(dato.data.avatarImage);
       setFollowers(dato.data.following);
       setFollowing(dato.data.followers);
+      const post = await axios.get(`http://localhost:5050/posts/${data}`);
+      setPost(post.data);
     };
     asyncFn();
   }, []);
-
+  console.log(post)
   return (
     <>
       <div className="flex  w-[25%] flex-col gap-y-5 pt-[2%] max-lg:w-[25%] max-sm:hidden">
@@ -112,7 +115,7 @@ const AsideRight = () => {
               </h3>
               <div className="my-3 flex w-[100%]">
                 <div className="flex w-[33%] flex-col items-center">
-                  <h1 className="text-lg font-bold">0</h1>
+                  <h1 className="text-lg font-bold">{post.length}</h1>
                   <h3 className="text-xs font-extralight opacity-60">Post</h3>
                 </div>
                 <div className="flex w-[33%] flex-col items-center">

@@ -86,9 +86,23 @@ const findByPost = async (req, res) => {
     });
 };
 
+const findUserPosts =  (req, res) => {
+  const userId = req.params.userId;
+
+  // Buscar todos los post de un usuario específico
+  Post.find({ userId: userId })
+    .then(posts => {
+      res.json(posts);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    });
+};
+
 
 module.exports = {
   friendPost,
+  findUserPosts,
   createPost,
   getPost,
   likePost,
