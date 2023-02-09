@@ -100,7 +100,7 @@ const userPost = () => {
   };
 
   return (
-    <div className="  h-full w-full rounded-lg shadow-lg py-3 bg-white dark:text-white dark:bg-[#16181C] ">
+    <div className="  h-full w-[80%] rounded-lg shadow-lg py-3 bg-white dark:text-white dark:bg-[#16181C] ">
       <div className=" h-full flex flex-col gap-y-12  rounded-lg py-5  items-center">
         <input
           type="text"
@@ -153,45 +153,9 @@ const userPost = () => {
                 clip-rule="evenodd"
               />
             </svg> */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6 plus"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"
-              />
-            </svg>
+           
 
-            <label>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6 plus cursor-pointer"
-              >
-                <path
-                  strokeLinecap="round"
-                  d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"
-                />
-              </svg>
-
-              <input
-                className=" hidden"
-                type="file"
-                id="file"
-                accept="video/*"
-                onChange={(e) => setVideo(e.target.files[0])}
-                /*   onClick={() => setOpen(true)} */
-              />
-            </label>
+            
           </div>
           <div className="flex justify-end">
             <button

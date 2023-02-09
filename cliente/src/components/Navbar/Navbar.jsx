@@ -16,7 +16,43 @@ const Navbar = () => {
   const colors = ["#ff6961", "#2ABA7D", "#84b6f4", "#fdcae1"];
   const [followers, setFollowers] = useState([]);
   const [id, setId] = useState("");
-const notificacion = followers.reverse();
+  const [userData, setUserData] = useState([]);
+ 
+   useEffect(() => {
+     const fetchFollowers = async () => {
+       const data = await JSON.parse(
+         localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
+       )._id;
+       const response = await axios.get(
+         `http://localhost:5050/users/follow/${data}`
+       );
+       const data1 = response.data;
+       setFollowers(data1);
+       console.log(followers);
+     };
+ 
+     fetchFollowers();
+   }, []);
+ 
+   useEffect(() => {
+     const fetchUserData = async () => {
+       const promises = followers.map(async (follower) => {
+         const response = await axios.get(
+           `http://localhost:5050/users/${follower}`
+         );
+      
+         return response.data;
+       });
+ 
+       const data = await Promise.all(promises);
+       setUserData(data);
+     };
+ 
+     fetchUserData();
+   }, [followers]);
+
+
+
   useEffect(() => {
     const asyncFn = async () => {
       const data = await JSON.parse(
@@ -28,7 +64,7 @@ const notificacion = followers.reverse();
     };
     asyncFn();
   }, []);
-console.log(followers);
+
 
   const setColor = (event) => {
     const currentColor = event.target.style.getPropertyValue("--bg-color");
@@ -298,20 +334,31 @@ console.log(followers);
                       Notificaciones
                     </h1>
                   </div>
-                  {followers.map((Element) => {
-                    return (
-                      <>
-                        <a href={"/Profile/" + Element} className="">
-                          <div className="relative flex w-[100%] py-3 border-notificacion gap-5 p-[2%] items-center text-black dark:text-white justify-center ">
-                            <h1 className="font-extralight">
-                              <span className="font-bold">{Element}</span> ha
-                              comenzado a seguirte.
-                            </h1>
-                          </div>
-                        </a>
-                      </>
-                    );
-                  })}
+                  {userData.map((Element) => {
+                              return (
+                                <>
+                                  <a
+                                    href={"/Profile/" + Element._id}
+                                    className=""
+                                  >
+                                    <div className="relative flex w-[100%] py-3 border-notificacion gap-5 p-[2%] items-center text-black dark:text-white justify-center ">
+                                      <div className="w-[15%]">
+                                      <img
+                                        src={`data:image/svg+xml;base64,${Element.avatarImage}`}
+                                        alt=""
+                                      />
+                                      </div>
+                                      <h1 className="font-extralight">
+                                        <span className="font-bold">
+                                          {Element.username}
+                                        </span>{" "}
+                                        ha comenzado a seguirte.
+                                      </h1>
+                                    </div>
+                                  </a>
+                                </>
+                              );
+                            })}
                 </div>
               </div>
             </div>

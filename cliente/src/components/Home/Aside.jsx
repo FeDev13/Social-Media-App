@@ -91,7 +91,6 @@ const Aside = () => {
     );
     setFollowing(followingResponse.data);
   };
-console.log(following);
   useEffect(() => {
     setNotFollowing(
       allUsers.filter((user) => !Object.values(following).includes(user._id))
@@ -102,8 +101,8 @@ console.log(following);
 
   return (
     <>
-      <div className="w-[15%] py-[2%] gap-y-10  justify-center  flex max-lg:hidden">
-        <div className="flex fixed w-[15%] flex-col  rounded-lg p-3 shadow-lg bg-white dark:text-white dark:bg-[#16181C] max-xl:text-xs">
+      <div className="w-[25%] py-[2%] gap-y-10  justify-end  flex max-lg:hidden">
+        <div className="flex fixed w-[20%] flex-col  rounded-lg p-3 shadow-lg bg-white dark:text-white dark:bg-[#16181C] max-xl:text-xs">
           <div className="relative w-[100%] py-6 px-4 ">
             <input
               type="search"

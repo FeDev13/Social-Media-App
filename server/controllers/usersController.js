@@ -125,6 +125,18 @@ module.exports.findByFollowers = async (req, res) => {
     });
 };
 
+
+module.exports.findByFollowing = async (req, res) => {
+  const { id } = req.params;
+  User.findById(id)
+    .then((data) => {
+      res.json(data.following);
+    })
+    .catch(() => {
+      res.json({ message: "Id no encontrado" });
+    });
+};
+
 module.exports.likePost = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);

@@ -79,7 +79,7 @@ export default function Register() {
           import.meta.env.REACT_APP_LOCALHOST_KEY,
           JSON.stringify(data.user)
         );
-        navigate("/login");
+        navigate("/setAvatar");
       }
     }
   };

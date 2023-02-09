@@ -16,7 +16,7 @@ const Post = ({ post, userprofile, video }) => {
   const [id, setId] = useState("");
   const { user: currentUser } = useContext(AuthContext);
   const PF = import.meta.env.VITE_PUBLIC_FOLDER;
-  console.log(post);
+  
   useEffect(() => {
     const asyncFn = async () => {
       const data = await JSON.parse(
@@ -73,7 +73,7 @@ const Post = ({ post, userprofile, video }) => {
   };
 
   return (
-    <div className="max-ms:px-0 flex h-[50%]  w-[65%] flex-col gap-y-8 py-[2%] px-[2%] max-lg:w-[70%] max-md:pl-0 max-sm:w-[95%]">
+    <div className="max-ms:px-0 flex h-[50%]  w-[85%] flex-col gap-y-8 py-[2%] px-[2%] max-lg:w-[70%] max-md:pl-0 max-sm:w-[95%]">
       <div className=" flex w-[100%] flex-col  rounded-lg bg-white p-[2%] shadow-lg dark:bg-[#16181C] dark:text-white max-lg:p-0">
         <div className="flex h-16 w-full p-2">
           <div className="relative  flex w-full cursor-pointer items-center gap-4">
@@ -85,26 +85,26 @@ const Post = ({ post, userprofile, video }) => {
 
             <div className="flex flex-col ">
               <h2>{userprofile.username}</h2>
-              <div className="flex gap-4">
-                <h4 className="text-xs text-blue-800"></h4>
+              
                 <h4 className="text-xs font-extralight opacity-70">
                   {format(post.createdAt)}
                 </h4>
-              </div>
+              
             </div>
           </div>
         </div>
-        <p className="px-[2%] py-[1%] text-lg font-light max-lg:text-base">
+        <p className="px-[3%] py-[1%] text-lg font-light max-lg:text-base">
           {post.desc}
         </p>
-        <img className="postImg" src={PF + post.img} alt="" />
-
+        <div className="w-full max-h-[400px] flex justify-center ">
+        <img className=" max-w-2xl " src={PF + post.img} alt="" />
+        </div>
         {/* <video controls width="auto">
       
           <source src={video} />
         </video> */}
 
-        <div className="flex w-full items-center gap-6 border-t-2 p-[2%]  ">
+        <div className="flex w-full items-center gap-6  p-[2%]  ">
           <div className="flex items-center gap-2">
           
             <svg xmlns="http://www.w3.org/2000/svg" onClick={likeHandler} viewBox="0 0 512 512" className="fill-red-600 w-5 h-6">

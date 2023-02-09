@@ -31,7 +31,7 @@ export function HomeCenter({ username }) {
   return (
     //trae todos los posts de los users
     <>
-      <div className=" max-ms:px-0 flex h-[50%]  w-[65%] flex-col gap-y-8 py-[2%] px-[2%] max-lg:w-[70%] max-md:pl-0 max-sm:w-[95%] items-center ">
+      <div className=" max-ms:px-0 flex h-[50%]  w-[55%] flex-col gap-y-8 py-[2%] px-[2%] max-lg:w-[70%] max-md:pl-0 max-sm:w-[95%] items-center ">
         <UserPost />
 
         {data.map((post) => {

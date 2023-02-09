@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 const NavSearch = () => {
   const [buscar, setBuscar] = useState("");
-  console.log(buscar);
   return (
     <div className=" relative rounded-full bg-[#F3F5F7] p-2 max-lg:hidden">
       <a
