@@ -6,6 +6,7 @@ import NavSearch from "./NavSearch";
 import "tw-elements";
 import ColorItem from "../Home/color-item";
 import Toggle from "./Toggle";
+import logo from "../../../public/assets/logo2.png";
 
 import axios from "axios";
 const Navbar = () => {
@@ -14,47 +15,45 @@ const Navbar = () => {
   let nav = document.getElementById("nav");
   let plus = document.getElementById("plus");
   const colors = ["#ff6961", "#2ABA7D", "#84b6f4", "#fdcae1"];
- 
+
   const [followers, setFollowers] = useState([]);
   const [id, setId] = useState("");
   const [userData, setUserData] = useState([]);
   const [Color, setCurrentColor] = useState("#2ABA7D");
   const [lista, setLista] = useState([]);
- 
-   useEffect(() => {
-     const fetchFollowers = async () => {
-       const data = await JSON.parse(
-         localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
-       )._id;
-       const response = await axios.get(
-         `http://localhost:5050/users/follow/${data}`
-       );
-       const data1 = response.data;
-       setFollowers(data1);
-       
-     };
- 
-     fetchFollowers();
-   }, []);
- 
-   useEffect(() => {
-     const fetchUserData = async () => {
-       const promises = followers.map(async (follower) => {
-         const response = await axios.get(
-           `http://localhost:5050/users/${follower}`
-         );
-      
-         return response.data;
-       });
- 
-       const data = await Promise.all(promises);
-       setUserData(data);
-       setLista(data.reverse());
-     };
- 
-     fetchUserData();
-   }, [followers]);
 
+  useEffect(() => {
+    const fetchFollowers = async () => {
+      const data = await JSON.parse(
+        localStorage.getItem(import.meta.env.REACT_APP_LOCALHOST_KEY)
+      )._id;
+      const response = await axios.get(
+        `http://localhost:5050/users/follow/${data}`
+      );
+      const data1 = response.data;
+      setFollowers(data1);
+    };
+
+    fetchFollowers();
+  }, []);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const promises = followers.map(async (follower) => {
+        const response = await axios.get(
+          `http://localhost:5050/users/${follower}`
+        );
+
+        return response.data;
+      });
+
+      const data = await Promise.all(promises);
+      setUserData(data);
+      setLista(data.reverse());
+    };
+
+    fetchUserData();
+  }, [followers]);
 
   useEffect(() => {
     const asyncFn = async () => {
@@ -68,17 +67,16 @@ const Navbar = () => {
     asyncFn();
   }, []);
 
-
   const defaultColor = "#2ABA7D";
   let currentColor = defaultColor;
-  
+
   const setColor = (event) => {
     currentColor = event.target.style.getPropertyValue("--bg-color");
-  
+
     if (currentColor === "undefined") {
       currentColor = defaultColor;
     }
-  
+
     setTheme(currentColor);
     localStorage.setItem("color", currentColor);
   };
@@ -98,10 +96,11 @@ const Navbar = () => {
       className="fixed top-0 z-10 flex w-[100%] items-center justify-between p-6 max-lg:px-6 "
     >
       <div className="flex">
-        <div className="flex items-center max-sm:hidden">
+        <div className="flex items-center max-sm: w-auto">
           <Link to="/">
-            <h1 className="pl-8 text-3xl uppercase text-white max-xl:text-2xl max-lg:p-0 max-lg:text-xl">
-              Social media app
+            <h1 className="pl-8 text-2xl uppercase text-white max-xl:text-2xl max-lg:p-0 max-lg:text-xl flex">
+              <img src={logo} alt="logo devplace" className=" w-1/3 h-auto" />{" "}
+              <p className=" sm:mt-8">Connect</p>
             </h1>
           </Link>
         </div>
@@ -198,7 +197,7 @@ const Navbar = () => {
         <div
           className="modal fade z- fixed top-[40%] left-0 hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
           id="exampleModalCenter"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalCenterTitle"
           aria-modal="true"
           role="dialog"
@@ -330,7 +329,7 @@ const Navbar = () => {
         <div
           className="modal fade fixed hidden  h-full w-[20%] top-[7%] right-0 overflow-y-auto overflow-x-hidden outline-none"
           id="exampleModalNotificacion"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalNotificacion"
           aria-modal="true"
           role="dialog"
@@ -345,31 +344,28 @@ const Navbar = () => {
                     </h1>
                   </div>
                   {lista.map((Element) => {
-                              return (
-                                <>
-                                  <a
-                                    href={"/Profile/" + Element._id}
-                                    className=""
-                                  >
-                                    <div className="relative flex w-full py-3 border-notificacion gap-5 p-[2%] items-center text-black dark:text-white ">
-                                      <div className="w-[15%]">
-                                      <img
-                                        src={`data:image/svg+xml;base64,${Element.avatarImage}`}
-                                        alt=""
-                                        className=""
-                                      />
-                                      </div>
-                                      <h1 className="font-extralight">
-                                        <span className="font-bold">
-                                          {Element.username}
-                                        </span>{" "}
-                                        ha comenzado a seguirte.
-                                      </h1>
-                                    </div>
-                                  </a>
-                                </>
-                              );
-                            })}
+                    return (
+                      <>
+                        <a href={"/Profile/" + Element._id} className="">
+                          <div className="relative flex w-full py-3 border-notificacion gap-5 p-[2%] items-center text-black dark:text-white ">
+                            <div className="w-[15%]">
+                              <img
+                                src={`data:image/svg+xml;base64,${Element.avatarImage}`}
+                                alt=""
+                                className=""
+                              />
+                            </div>
+                            <h1 className="font-extralight">
+                              <span className="font-bold">
+                                {Element.username}
+                              </span>{" "}
+                              ha comenzado a seguirte.
+                            </h1>
+                          </div>
+                        </a>
+                      </>
+                    );
+                  })}
                 </div>
               </div>
             </div>

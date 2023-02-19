@@ -96,7 +96,10 @@ export default function Profile() {
                   <h1 className="font-bold text-3xl text-center mt-3 mb-10">
                     {currentUserName}
                   </h1>
-                  <h5 className=" text-center mb-8 mt-0"> {currentDescripcion}</h5>
+                  <h5 className=" text-center mb-8 mt-0">
+                    {" "}
+                    {currentDescripcion}
+                  </h5>
                   <div className=" flex flex-row mt-0 mb-10">
                     @{currentUserName}
                   </div>
@@ -119,29 +122,29 @@ export default function Profile() {
         </Link > */}
                   <div className="flex justify-center gap-4">
                     <div className="w-full flex justify-center">
-                      <div className="w-full flex gap-3 justify-center">
+                      <div className="w-auto flex gap-3 justify-center sm: flex-col">
                         <Link to="/" className=" w-[10%]">
                           <Logout />
                         </Link>
                         <button
                           type="button"
                           id="btn"
-                          className="border w-[10%] container cursor-pointer rounded-lg"
+                          className="border w-auto p-2 container cursor-pointer rounded-lg"
                           data-bs-toggle="modal"
                           data-bs-target="#exampleModalEdit"
                         >
-                          Editar Perfil
+                          Edit
                         </button>
                       </div>
                       <div
-                        className="modal fade fixed hidden h-full w-[30%] top-[50%] right-24 overflow-y-auto overflow-x-hidden outline-none"
+                        className="modal fade fixed hidden h-full w-[30%] top-[50%] right-11 overflow-y-auto overflow-x-hidden outline-none"
                         id="exampleModalEdit"
-                        tabindex="-1"
+                        tabIndex="-1"
                         aria-labelledby="exampleModalEdit"
                         aria-modal="true"
                         role="dialog"
                       >
-                        <div className="flex h-[20%] w-[60%] m-auto   bg-white  dark:bg-[#16181C] dark:text-white shadow-lg rounded-lg ">
+                        <div className="flex h-[20%] w-full m-auto bg-white  dark:bg-[#16181C] dark:text-white shadow-lg rounded-lg ">
                           <div class="modal-dialog pointer-events-none relative w-full ">
                             <div class="modal-content pointer-events-auto relative flex w-full flex-col rounded-md shadow-lg border-search bg-white dark:bg-[#16181C] bg-clip-padding text-current outline-none">
                               <div class="modal-body relative p-4  ">
@@ -150,7 +153,7 @@ export default function Profile() {
                                     Edit your profile
                                   </h1>
                                   <input
-                                    className="border-search rounded-lg p-2 text-black"
+                                    className="border-search rounded-lg p-2 text-black w-10/12"
                                     placeholder="Change your name"
                                     type="text"
                                     value={username}
@@ -158,8 +161,8 @@ export default function Profile() {
                                       setUsername(e.target.value)
                                     }
                                   />
-                                    <input
-                                    className="border-search rounded-lg p-2 text-black"
+                                  <input
+                                    className="border-search rounded-lg p-2 text-black w-10/12"
                                     placeholder="Change your description"
                                     type="text"
                                     value={descripcion}
@@ -167,28 +170,28 @@ export default function Profile() {
                                       setDescripcion(e.target.value)
                                     }
                                   />
-                                  
+
                                   <div className="flex flex-col items-center gap-2 ">
                                     <label
-                                      class=" font-bold text-sm text-gray-900 dark:text-white"
+                                      class=" font-bold text-sm text-gray-900 dark:text-white cursor-pointer"
                                       for="file_input"
                                     >
                                       Set background
+                                      <input
+                                        className=" w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer hidden "
+                                        id="file_input"
+                                        type="file"
+                                        onChange={(e) =>
+                                          setBackground(e.target.files)
+                                        }
+                                      />
                                     </label>
-                                    <input
-                                      className=" w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointe "
-                                      id="file_input"
-                                      type="file"
-                                      onChange={(e) =>
-                                        setBackground(e.target.files)
-                                      }
-                                    />
                                   </div>
                                   <button
                                     className="border w-[50%] container cursor-pointer rounded-lg font-extralight p-2 text-white"
                                     type="submit"
                                   >
-                                    Guardar
+                                    Save
                                   </button>
                                 </div>
                               </div>

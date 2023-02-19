@@ -23,7 +23,6 @@ const AsideRight = () => {
       );
       const dataFollower = responseFollower.data;
       setFollowers(dataFollower);
-      
     };
     fetchFollowers();
   }, []);
@@ -38,7 +37,6 @@ const AsideRight = () => {
       );
       const dataFollowing = responseFollowing.data;
       setFollowing(dataFollowing);
-    
     };
     fetchFollowing();
   }, []);
@@ -49,7 +47,7 @@ const AsideRight = () => {
         const response = await axios.get(
           `http://localhost:5050/users/${following}`
         );
-        
+
         return response.data;
       });
 
@@ -66,7 +64,7 @@ const AsideRight = () => {
         const response = await axios.get(
           `http://localhost:5050/users/${followers}`
         );
-      
+
         return response.data;
       });
 
@@ -93,7 +91,7 @@ const AsideRight = () => {
     };
     asyncFn();
   }, []);
- 
+
   return (
     <>
       <div className="flex  w-[25%] flex-col gap-y-5 pt-[2%] max-lg:w-[25%] max-sm:hidden">
@@ -149,21 +147,19 @@ const AsideRight = () => {
                           <div class="modal-body relative p-4  ">
                             <div className="flex relative w-full justify-center">
                               <div className="flex w-full justify-center border-b border-gray-200">
-
-                              <h1 className="text-lg font-bold mb-5 mt-2 ">
-                                Followers
-                              </h1>
+                                <h1 className="text-lg font-bold mb-5 mt-2 ">
+                                  Followers
+                                </h1>
                               </div>
-                             
-                                <button
-                                  type="button"
-                                  id="modal"
-                                  className="rounded absolute right-0 top-1 px-3  py-2 text-xs font-medium uppercase leading-tight text-white shadow-md  transition duration-150 ease-in-out hover:shadow-lg  focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
-                                  data-bs-dismiss="modal"
-                                >
-                                  X
-                                </button>
-                          
+
+                              <button
+                                type="button"
+                                id="modal"
+                                className="rounded absolute right-0 top-1 px-3  py-2 text-xs font-medium uppercase leading-tight text-white shadow-md  transition duration-150 ease-in-out hover:shadow-lg  focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
+                                data-bs-dismiss="modal"
+                              >
+                                X
+                              </button>
                             </div>
                             {userDataFollowers.map((Element) => {
                               return (
@@ -223,23 +219,21 @@ const AsideRight = () => {
                       <div class="modal-dialog pointer-events-none relative w-full ">
                         <div class="modal-content pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white dark:bg-[#16181C] bg-clip-padding text-current outline-none">
                           <div class="modal-body relative p-4  ">
-                          <div className="flex relative w-full justify-center">
+                            <div className="flex relative w-full justify-center">
                               <div className="flex w-full justify-center border-b border-gray-200">
-
-                              <h1 className="text-lg font-bold mb-5 mt-2 ">
-                                Following
-                              </h1>
+                                <h1 className="text-lg font-bold mb-5 mt-2 ">
+                                  Following
+                                </h1>
                               </div>
-                             
-                                <button
-                                  type="button"
-                                  id="modal"
-                                  className="rounded absolute right-0 top-1 px-3  py-2 text-xs font-medium uppercase leading-tight text-white shadow-md  transition duration-150 ease-in-out hover:shadow-lg  focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
-                                  data-bs-dismiss="modal"
-                                >
-                                  X
-                                </button>
-                          
+
+                              <button
+                                type="button"
+                                id="modal"
+                                className="rounded absolute right-0 top-1 px-3  py-2 text-xs font-medium uppercase leading-tight text-white shadow-md  transition duration-150 ease-in-out hover:shadow-lg  focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
+                                data-bs-dismiss="modal"
+                              >
+                                X
+                              </button>
                             </div>
                             {userDataFollowing.map((Element) => {
                               return (

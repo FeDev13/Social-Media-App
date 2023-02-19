@@ -18,6 +18,6 @@ routerPost.get("posts/:username", getPost);
 routerPost.get("/postss/:id", findByPost);
 routerPost.put("/posts/:id/like", likePost);
 routerPost.put("/posts/:id/comment", comentPost);
-routerPost.get('/posts/:userId', findUserPosts);
+routerPost.get("/posts/:userId", findUserPosts);
 
 module.exports = routerPost;

@@ -3,11 +3,15 @@ import { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import UserPosts from "./UserPosts";
+
 function ProfileUsers() {
   const bgImage =
     "https://images.unsplash.com/photo-1673447043169-a309c86f822c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDczfGlVSXNuVnRqQjBZfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
   let { id } = useParams();
+
   const url = `http://localhost:5050/users/${id}`;
+
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [description, setdescription] = useState(undefined);
@@ -15,6 +19,7 @@ function ProfileUsers() {
   const [followers, setFollow] = useState(undefined);
   const [following, setFollowing] = useState(undefined);
   const [background, setBackground] = useState(undefined);
+
   useEffect(() => {
     async function productosDB() {
       const data = await axios.get(url);
@@ -51,29 +56,27 @@ function ProfileUsers() {
               <h1 className="font-bold text-3xl text-center mt-3 mb-10">
                 {currentUserName}
               </h1>
-              <h5 className=" text-center mb-8 mt-0">
-             
-               {description}
-              </h5>
+              <h5 className=" text-center mb-8 mt-0">{description}</h5>
               <div className="flex justify-center gap-9">
-              <div className="flex w-[33%] flex-col items-center">
-                      <h1 className="text-lg font-bold">{following}</h1>
-                      <h3 className="text-xs font-extralight opacity-60">
-                        Followers
-                      </h3>
-                    </div>
-                    <div className="flex w-[33%] flex-col items-center">
-                      <h1 className="text-lg font-bold">{followers}</h1>
-                      <h3 className="text-xs font-extralight opacity-60">
-                        Following
-                      </h3>
-                    </div>
-                    </div>
+                <div className="flex w-[33%] flex-col items-center">
+                  <h1 className="text-lg font-bold">{following}</h1>
+                  <h3 className="text-xs font-extralight opacity-60">
+                    Followers
+                  </h3>
+                </div>
+                <div className="flex w-[33%] flex-col items-center">
+                  <h1 className="text-lg font-bold">{followers}</h1>
+                  <h3 className="text-xs font-extralight opacity-60">
+                    Following
+                  </h3>
+                </div>
+              </div>
               {/*hacerlo dinamico*/}
             </div>
 
             {/* botones */}
             <div className="text-center mb-7">
+              <UserPosts />
               {/* <Link to='/chat' className="py-3 px-6 container rounded-lg ">
           <button
             type="button"

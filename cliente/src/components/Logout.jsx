@@ -16,8 +16,11 @@ export default function Logout() {
     }
   };
   return (
-    <button className="rounded-lg  container p-2 border-none cursor-pointer " onClick={handleClick}>
-     Salir
+    <button
+      className="rounded-lg w-auto  container p-2 border-none cursor-pointer "
+      onClick={handleClick}
+    >
+      Logout
     </button>
   );
 }
