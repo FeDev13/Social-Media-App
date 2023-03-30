@@ -1,13 +1,23 @@
 const express = require("express");
-const router = express.Router();
+const routerPost = express.Router();
 
-const {  friendPost,createPost,getPost,likePost,comentPost} = require('../controllers/postsController');
+const {
+  findUserPosts,
+  createPost,
+  getPost,
+  likePost,
+  comentPost,
+  getAllPosts,
+  findByPost,
+} = require("../controllers/postsController");
 
+routerPost.post("/posts/", createPost);
+routerPost.get("/posts/", getAllPosts);
+routerPost.get("posts/:username", getPost);
+// routerPost.get("/posts/:id", friendPost);
+routerPost.get("/postss/:id", findByPost);
+routerPost.put("/posts/:id/like", likePost);
+routerPost.put("/posts/:id/comment", comentPost);
+routerPost.get("/posts/:userId", findUserPosts);
 
-router.post('/posts/', createPost);
-router.get('/posts/:username', getPost);
-router.get('/posts/:id', friendPost);
-router.put('/posts/:id/like', likePost);
-router.put('/posts/:id/comment', comentPost);
-
-module.exports=router;
+module.exports = routerPost;
